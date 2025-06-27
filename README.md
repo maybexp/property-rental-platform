@@ -12,6 +12,7 @@ Site for listing and searching rental properties. Includes most of the core rent
 - Search and filter rental properties by various criteria
   - Report fraudulent properties
 - User authentication (sign up, login, logout)
+  - Using `bcrypt`hashing algorithm for passwords
 - **My account**-page which includes:
   - Saved rental properties
   - Your listed rental properties
