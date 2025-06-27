@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+body{
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEX+LVa6As0uAAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII=");
+    background-size: 100% 430px;
+    background-repeat: no-repeat;
+}
+
+.container{
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    padding:10px 20px;
+    margin-top: 70px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    max-width:850px;
+    background-color: white;
+    padding:20px 30px 30px 30px;
+}
+h1{
+font-size:30px;
+    font-weight:bold;
+}
+
+h2{
+    font-size:24px;
+}
+
+a{
+    text-decoration-line: none;
+}
+
+.faqContainer{
+    width:700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-heading{
+    border-bottom: #777;
+    padding: 20px 60px;
+}
+
+.hr-line{
+    width:90%;
+    margin-left:20px;
+}
+/* Style the buttons that are used to open and close the faq-page body */
+.faq-page {
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 30px 20px;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+.faq-body{
+    margin: auto;
+    /* text-align: center; */
+   width: 50%;
+}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.faq-page:hover {
+    background-color: #F9F9F9;
+}
+/* Style the faq-page panel. Note: hidden by default */
+.faq-body {
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+.faq-page:after {
+    content: '\02795';
+    /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+.active:after {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
+}
+
+
+
+
+
+</style>
+{% endblock %}
+
+{% block mobile %}
+    .container{
+        width: 100%;
+    }
+    .faq-container, .faq-body, .faq-page{
+        width: 100%;
+    }
+
+{% endblock %}
+
+{% block body %}
+    <noscript>
+        <div style="background-color: #f8d7da; color: #721c24; padding: 10px;">
+            <h3>OBS! Det ser ud til, at du har slået JavaScript fra.</h3>
+            <p>Denne hjemmeside kræver JavaScript for at fungere korrekt.</p>
+            <p>Slå venligst JavaScript til i din browser eller skift til en browser, der understøtter JavaScript, for at fortsætte med at bruge vores hjemmeside.</p>
+            <p>Hvis du ikke ved hvordan du slår Javascript til kan du følge denne <a href="https://www.enable-javascript.com/" target="_blank">guide</a>.</p>
+        </div>
+    </noscript>
+
+        <!--<img src="" alt="" class="img-fluid" style="width:200px;padding-top:40px;  display: inline;">-->
+    <div class="faqContainer">
+        <h1 class="faq-heading text-center mb-0 pb-0">KUNDESERVICE 💬</h1>
+        <hr style="width:70%;" class="mx-auto">
+        <div class="mx-auto text-center">
+            <img src="{% static 'customerServicePerson.PNG' %}" alt="" class="d-inline-block"
+                 style="margin-left:-20px;width:120px; border-radius: 60px;">
+            <p class="d-inline-block" style="font-size:17px;"><span style="vertical-align: 4px;">👈 </span>
+                <a href="mailto:support@boligerne.dk">support@boligerne.dk</a>
+            </p>
+
+        </div>
+        <section class="faq-container">
+            <div class="faq-two">
+                <!-- faq question -->
+                <h2 class="faq-page">Hvordan kontakter jeg jer?</h2>
+                <!-- faq answer -->
+                <div class="faq-body">
+                    <p>Du kan kontakte os på vores email: <a
+                            href="mailto:support@boligerne.dk">support@boligerne.dk</a>.
+                        <br>
+                        <br>
+                        Vi svarer typisk inden for 24 timer.
+                    </p>
+                </div>
+            </div>
+            <hr class="hr-line">
+            <div class="faq-three">
+                <!-- faq question -->
+                <h2 class="faq-page">Hvordan sletter jeg min bruger?</h2>
+                <!-- faq answer -->
+                <div class="faq-body">
+                    <p>Du sletter din bruger ved at skrive til os på email: <a href="mailto:support@boligerne.dk">support@boligerne.dk</a>.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="hr-line">
+            <div class="faq-three">
+                <!-- faq question -->
+                <h2 class="faq-page">Hvordan kan det være at boligportalen er gratis?</h2>
+                <!-- faq answer -->
+                <div class="faq-body">
+                    <p>Boligportalen er gratis på ubestemt tid fordi det på mange andre boligportaler koster 300kr+
+                        for blot at kunne kontakte udlejeren.
+                        <br>
+                        <br>
+                        Det mener vi ikke er en fair pris.
+                        <br>
+                        <br>
+                        Skulle der en dag komme betaling på denne side for at dække omkostningerne, vil det være til
+                        en væsentligt billigere pris
+                    </p>
+                </div>
+            </div>
+
+            <div class="mx-auto text-center" style="padding-top:50px; padding-bottom:200px;">
+                <img src="{% static 'faq.png' %}" alt="Fancy image showing FAQ" class="img-fluid "
+                     style="width:200px;">
+            </div>
+        </section>
+
+
+    </div>
+
+    <script>
+    var faq = document.getElementsByClassName("faq-page");
+var i;
+for (i = 0; i < faq.length; i++) {
+    faq[i].addEventListener("click", function () {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+        /* Toggle between hiding and showing the active panel */
+        var body = this.nextElementSibling;
+        if (body.style.display === "block") {
+            body.style.display = "none";
+        } else {
+            body.style.display = "block";
+        }
+    });
+}
+    </script>
+{% endblock %}

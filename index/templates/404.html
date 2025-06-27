@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <style>
+    .container{
+
+  background-color:white;
+  padding-top:40px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  text-align:center;
+  margin-bottom:20%;
+}
+
+
+img{
+border-radius:20px;
+width:300px;
+    margin-top:30px;
+}
+    </style>
+
+
+{% endblock %}
+
+{% block head %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block body %}
+<h1>⛔ Fejl.</h1>
+<p><b>Denne side eksisterer ikke længere.</b></p>
+
+<p>Klik <a href="{% url 'index' %}">her</a> for at gå tilbage til forsiden.</p>
+<img src="https://cdn.britannica.com/51/196551-050-0922C720/Edward-Snowden-2013.jpg" class="img-fluid" alt="Billede af Edward Snowden">
+{% endblock %}

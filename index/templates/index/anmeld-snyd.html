@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+body{
+    background-color: #FBFAFA;
+}
+
+.container{
+    background-color: white;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    padding:10px 40px 150px 40px;
+    max-width:700px;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 30px;
+    padding-top:20px;
+    padding-bottom: 10px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+    <h1>Anmeld snyd🛑</h1>
+    <p style="display: inline">Sådan anmelder du en annonce
+        <br>
+        <br>
+    1. Gå ind på annoncen
+        <br>
+    2. Scroll ned til bunden af siden
+        <br>
+    3. Klik på ikonet i <u>højre</u> side:
+    </p>
+    <br>
+    <div class="report" style="margin-left: 20px; padding:4px;">
+        <svg width="16px" height="16px" style="display: inline-block" viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>report_flag [#1420]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-59.000000, -640.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M7.2,492 L24,492 L24,480 L7.2,480 L7.2,492 Z M3,500 L5.1,500 L5.1,480 L3,480 L3,500 Z" id="report_flag-[#1420]"> </path> </g> </g> </g> </g></svg>
+        Rapporter
+    </div>
+
+    <p>4. Udfyld felterne og klik "Indsend"</p>
+{% endblock %}

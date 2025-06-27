@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block style %}
+<style>
+body {
+    background-color: #F8FAFB;
+}
+
+.navbar-light, .bg-light, .navbar{
+    background-color: transparent !important;
+    box-shadow: none;
+}
+
+.container{
+    display: flex;
+    gap: 50px;
+    padding-top:50px;
+    padding-bottom:200px;:
+}
+
+.navbarUserForm{
+    display:none !important;
+}
+
+.boligerneNavbar{
+
+}
+
+h1{
+    float:left;
+    font-weight: bold;
+    font-size: 30px;
+    color:#1C1C1C;
+}
+
+.loginForm{
+    width: 50%;
+}
+
+.loginForm p{
+    color:#1C1C1C;
+    text-decoration-line: underline;
+}
+
+.socialLogin:hover{
+    background-color:#212529;
+    color:white;
+}
+
+.createUserText{
+    float:right;
+    color:#FE2C55;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+.loginBtn{
+    background-color:#0D6EFD;
+    color:white;
+    width:400px;
+    display: block;
+    font-weight: bold;
+    width:100%;
+    height:45px;
+    border-radius: 15px;
+}
+
+.loginBtn:hover {
+    background-color: #0B63E0;
+    color:white;
+}
+
+label {
+  font-weight: bold;
+}
+
+#password {
+  margin-bottom:10px;
+}
+
+input[type=text], input[type=password]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    padding: 10px 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 12px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    outline: none;
+
+}
+
+.acceptTermsOfUse{
+    margin:10px 0px;
+}
+
+#termOfUseCheckbox{
+    border-width: 2px;
+    transform: scale(1.3);
+}
+
+.outerFooter{
+    display:none;
+}
+
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <!-- https://www.spotahome.com/s/london/for-rent:apartments -->
+    <div>
+        <img src="{% static 'login.svg' %}" alt="" class="img-fluid" style="max-width:400px;">
+    </div>
+ <div class="loginForm">
+    <h1>Opret bruger</h1>
+    <a href="{% url 'login' %}" class="createUserText">Log ind</a>
+    <br>
+    <br>
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% else %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" class="mx-auto" action="{% url 'createUser' %}">
+        {% csrf_token %}
+        <label for="email" class="labelStyle">Email</label>
+        <br>
+        <input type="text" placeholder="Email" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus id="email" name="email">
+        <br>
+        <label for="password" class="labelStyle">Kodeord</label>
+        <br>
+        <input type="password" placeholder="Kodeord" id="password">
+        <br>
+        <label for="passwordRepeat" class="labelStyle">Gentag kodeord</label>
+        <br>
+        <input type="password" placeholder="Gentag kodeord" id="passwordRepeat" name="password">
+        <br>
+        <label for="fullName" class="labelStyle">Fulde navn</label>
+        <br>
+        <input type="text" placeholder="Fulde navn" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false"  id="fullName" name="full_name">
+        <div class="form-check acceptTermsOfUse">
+            <input class="form-check-input" type="checkbox" required id="termOfUseCheckbox" name="acceptTermsOfUse">
+            <label class="form-check-label" for="termOfUseCheckbox">
+                Jeg accepterer <a href="{% url 'vilkaar' %}" target="_blank">Boligerne.dk's vilkår</a>
+            </label>
+        </div>
+
+        <input type="submit" value="Opret bruger" class="btn btn-default mx-auto loginBtn">
+
+    </form>
+</div>
+
+
+{% endblock %}

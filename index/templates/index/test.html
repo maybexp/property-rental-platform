@@ -1,0 +1,465 @@
+{% extends 'base.html' %}
+
+
+{% block navbarStyles %}
+    border-bottom: 0px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px;
+{% endblock %}
+
+{% block style %}
+<style>
+
+.container-fluid{
+
+    /*     padding:10px 5px 20px 8px; */
+    width:89%;
+    background-color: white;
+}
+
+h1{
+    font-weight: bold;
+    font-size:34px;
+}
+
+.form-control:focus, .form-select:focus{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.labelStyle{
+    color:#2C2C2C;
+    font-size: 16px;
+}
+
+.resetFiltersBtn{
+        margin-bottom:200px;
+}
+
+.filter{
+    /*     background-color: #FBFAFA; */
+    padding-top: 20px;
+}
+
+.col-sm-9{
+   /* box-shadow: 0 0 1px rgba(34, 25, 25, 0.4); */
+    padding:20px 0px 40px 10px;
+    margin:0px;
+}
+
+.col-sm-9 .row{
+    margin-top:20px;
+}
+
+.form-check-input {
+    border-width: 2px;
+    width:17px;
+    height:17px;
+}
+
+.form-check-input:focus, .form-check-input:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+input[type='text']::placeholder{
+    color:#A9A9A9;
+}
+
+.filterCheckbox{
+    font-size:16px;
+}
+
+.squareMeterText{
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+.amountOfHomes{
+    color:#222222;
+}
+
+.boligAnnonce{
+    position: relative;
+    width:230px;
+    height:280px;
+    padding:0px;
+    margin-top:30px;
+    background-color: white;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    cursor: pointer;
+    border-radius:8px;
+}
+
+.address{
+    font-weight: bold;
+    padding:8px 4px 0px 10px;
+    margin-bottom: 0px;
+    font-size:15px;
+}
+
+.img-fluid {
+    height: 155px;
+    object-fit: cover;
+    border-radius:5px 5px 0px 0px;
+}
+
+.price{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin:0px 10px 3px 0px;
+    font-weight: bold;
+    font-size:17px;
+}
+
+.sort{
+    width:auto;
+    margin-right:10px;
+    border-radius: 0px;
+}
+
+.sort:focus{
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+#noApartmentsFound{
+    background-color: #F7F6F5;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    border-radius:8px;
+    padding:20px 20px 20px 20px;
+    display: none;
+}
+
+#noApartmentsFound h2{
+    font-weight:bold;
+}
+
+
+.pagination{
+    padding-top: 50px;
+    padding-bottom:50px;
+}
+
+.paginationBtn{
+    background-color: white;
+    color:black;
+    border-radius:5px;
+    margin-left:10px;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    font-weight: bold;
+}
+
+.paginationBtn:hover{
+    background-color: #778899;
+    color:white;
+}
+
+.paginationBtnActive{
+    background-color:#FE2C55;
+    color:white;
+}
+
+.pagination{
+    justify-content: center;
+}
+
+
+/* */
+
+@media only screen and (min-width: 1200px) {
+  .col-sm-9 .row {
+      display: flex;
+      justify-content: center;
+      padding-left: 0px !important;
+      margin-left:-3% !important;
+  }
+}
+
+
+
+
+</style>
+{% endblock %}
+
+{% block containerFluid %}-fluid{% endblock %}
+
+{% block body %}
+
+<div class="row">
+<div class="col-sm-3 filter">
+    <form id="filterForm" onsubmit="return false;">
+        <div class="housingAgent"
+             style="background-color: #26A574;padding:0px; border-radius: 5px; color:white; box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);">
+            <div class="form-check" style="padding:11px;">
+
+                <div class="form-check form-switch" style="margin-left:7px;">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"
+                           style="font-weight: bold;margin-left:4px">BoligAgent</label>
+                </div>
+
+                <small>
+                    <label class="form-check-label" for="checkboxHousingAgent">
+                        Modtag email om nye annoncer med disse kriterier 📧
+                    </label>
+                </small>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="filterCheckbox">
+            <label for="houseType">Boligtype</label>
+            <br>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" onclick="loadData()" id="checkboxApartment">
+                <label class="form-check-label" for="checkboxApartment">
+                    Lejlighed
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" onclick="loadData()" id="checkboxRoom">
+                <label class="form-check-label" for="checkboxRoom">
+                    Værelse
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" onclick="loadData()" id="checkboxHouse">
+                <label class="form-check-label" for="checkboxHouse">
+                    Hus
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" onclick="loadData()" id="checkboxTerracedHouse">
+                <label class="form-check-label" for="checkboxTerracedHouse">
+                    Rækkehus
+                </label>
+            </div>
+        </div>
+
+        <br>
+
+
+        <label for="squareMeterInput" class="labelStyle">Maks husleje💰</label>
+        <div class="input-group">
+            <input type="tel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                   class="form-control" id="squareMeterInput" placeholder="Maks husleje">
+            <div class="input-group-append">
+                <span class="input-group-text squareMeterText">kr/md</span>
+            </div>
+        </div>
+
+        <br>
+
+        <label for="minimumSize" class="labelStyle">Minimum størrelse</label>
+        <div class="input-group">
+            <input type="tel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                   class="form-control" id="minimumSize" placeholder="Minimum størrelse">
+            <div class="input-group-append">
+                <span class="input-group-text squareMeterText">m2</span>
+            </div>
+        </div>
+
+        <br>
+        <div>
+            <label for="filterRooms" class="labelStyle">Minimum antal værelser</label>
+            <select autocomplete="off" class="form-select" id="filterRooms">
+                <option value="1">Mindst 1 værelse</option>
+                <option value="2">Mindst 2 værelse</option>
+                <option value="3">Mindst 3 værelse</option>
+                <option value="4">Mindst 4 værelse</option>
+                <option value="5">Mindst 5 værelse</option>
+                <option value="6">Mindst 6 værelse</option>
+                <option value="7">Mindst 7 værelse</option>
+                <option value="8">Mindst 8 værelse</option>
+                <option value="9">Mindst 9 værelse</option>
+                <option value="10">Mindst 10 værelse</option>
+            </select>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label>Flere filtre:</label><br>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" onclick="loadData()" id="balcony" name="balcony" value="Altan/terrasse">
+                <label class="form-check-label" for="balcony">Altan/terrasse</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" onclick="loadData()" id="animalsAllowed" name="animalsAllowed" value="Husdyr tilladt">
+                <label class="form-check-label" for="animalsAllowed">Husdyr tilladt</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" onclick="loadData()" id="elevator" name="elevator" value="Elevator">
+                <label class="form-check-label" for="elevator">Elevator</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" onclick="loadData()" id="furnished" name="furnished" value="Møbleret">
+                <label class="form-check-label" for="furnished">Møbleret</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" onclick="loadData()" id="parking" name="parking" value="Parkering">
+                <label class="form-check-label" for="parking">Parkering</label>
+            </div>
+        </div>
+
+        <br>
+
+        <button class="btn btn-primary resetFiltersBtn">Nulstil</button>
+    </form>
+</div>
+
+<div class="col-sm-9">
+    {% if apartments %}
+    <h1>Lejeboliger i {{ cityName |title}}🏘️</h1>
+    {% else %}
+        <h1>Ingen lejeboliger i {{ cityName }}</h1>
+    {% endif %}
+    <p class="amountOfHomes pb-0 mb-0" style="display: inline-block">
+        {% if apartments %}
+        <span id="apartmentsCount"></span> boliger fundet
+        {% else %}
+        0 boliger fundet
+        {% endif %}
+    </p>
+
+    <div style="display: flex; align-items: center; float:right; padding:0px; margin:0px;">
+        <span style="margin-right: 10px;">Sorter efter:</span>
+        <select name="filterBy" class="form-select sort" id="sortMethod" style="border-radius: 6px;">
+            <option value="newestFirst">Nyeste øverst</option>
+            <option value="cheapestFirst">Billigste øverst</option>
+            <option value="expensiveFirst">Dyreste øverst</option>
+            <option value="biggestFirst">Størrelse (største øverst)</option>
+            <option value="smallestFirst">Størrelse (mindste øverst)</option>
+        </select>
+    </div>
+
+    <div class="row">
+        {% if apartments %}
+
+
+        {% else %}
+            <h2 style="margin-left:10px;font-size: 20px;">Ingen søgeresultater 😵</h2>
+            <a href="{% url 'index' %}" style="margin-left:10px; margin-top:10px; ">Gå til forsiden</a>
+        {% endif %}
+
+        <div id="noApartmentsFound">
+            <p style="padding:0px;margin:0px 0px 10px 0px; text-align: center"><span>❌</span></p>
+            <h2 style="text-align: center">Ingen boliger fundet</h2>
+            <p style="text-align: center">Der kunne ikke findes nogle boliger som matchede dine kriterier.</p>
+        </div>
+        <div id="apartments-container"></div>
+
+    </div>
+
+
+{% if apartments.has_other_pages %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if apartments.has_previous %}
+                <a href="?side={{ apartments.previous_page_number }}" class="btn btn-default paginationBtn">Forrige</a>
+            {% else %}
+                <button class="btn btn-default paginationBtn disabled" disabled style="color:darkgray; border-color:#F4F4F4;">Forrige</button>
+            {% endif %}
+
+            {% for page in apartments.paginator.page_range %}
+                {% if apartments.number == page %}
+                    <button class="btn btn-primary paginationBtn" style="background-color: #778899; border:1px solid #778899; color:white;">{{ page }}</button>
+                {% elif page > apartments.number|add:'-3' and page < apartments.number|add:'3' %}
+                    <a href="?side={{ page }}" class="btn btn-default paginationBtn">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if apartments.has_next %}
+                <a href="?side={{ apartments.next_page_number }}" class="btn btn-default paginationBtn">Næste</a>
+            {% else %}
+                <button class="btn btn-default paginationBtn disabled" disabled style="color:darkgray; border-color:#F4F4F4;">Næste</button>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+<script>
+function loadData(){
+    // Retrieve the values from the input fields
+    var maxMonthlyRent = document.getElementById('squareMeterInput').value;
+    var minimumSize = document.getElementById('minimumSize').value;
+    var rooms = document.getElementById('filterRooms').value;
+    var checkboxApartment = document.getElementById('checkboxApartment').checked;
+    var checkboxRoom = document.getElementById('checkboxRoom').checked;
+    var checkboxHouse = document.getElementById('checkboxHouse').checked;
+    var checkboxTerracedHouse = document.getElementById('checkboxTerracedHouse').checked;
+
+    var balcony = document.getElementById('balcony').checked;
+    var animalsAllowed = document.getElementById('animalsAllowed').checked;
+    var elevator = document.getElementById('elevator').checked;
+    var furnished = document.getElementById('furnished').checked;
+    var parking = document.getElementById('parking').checked;
+
+    var sortMethod = document.getElementById('sortMethod').value;
+
+
+let queryString = window.location.search;
+let urlParams = new URLSearchParams(queryString);
+let pageValue = urlParams.get('side')
+console.log(pageValue)
+if (pageValue == null) {
+    pageValue = 1;
+}
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/ajax/endpoint/?address=' + '{{ cityName }}' + '&max_monthly_rent=' + maxMonthlyRent + '&minimumSize=' + minimumSize + "&rooms=" + rooms + "&checkboxApartment=" + checkboxApartment + "&checkboxRoom=" + checkboxRoom + "&checkboxHouse=" + checkboxHouse + "&checkboxTerracedHouse=" + checkboxTerracedHouse + "&balcony=" + balcony + "&animalsAllowed=" + animalsAllowed + "&elevator=" + elevator + "&furnished=" + furnished + "&parking=" + parking + "&sortMethod=" + sortMethod + "&side=" + pageValue, true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Parse the JSON response
+            var response = JSON.parse(xhr.responseText);
+
+            // Handle the response data here
+            // You can access the HTML elements and update their contents
+            // based on the data received from the server
+
+            // For example, if you have a <div> element with id "results",
+            // you can update its contents with the received HTML elements as follows:
+            var resultsDiv = document.getElementById('apartments-container');
+            resultsDiv.innerHTML = response.join('');
+            var apartmentCount = response.length;
+            document.getElementById('apartmentsCount').innerText = apartmentCount;
+            if(apartmentCount == 0){
+                document.getElementById('noApartmentsFound').style.display = 'block';
+            }else{
+                document.getElementById('noApartmentsFound').style.display = 'none';
+            }
+        }
+    };
+
+// Send the AJAX request
+    xhr.send();
+
+}
+
+loadData()
+
+document.getElementById('filterForm').addEventListener('keyup', function(event) {
+    event.preventDefault();
+    loadData();
+});
+
+document.getElementById('filterRooms').addEventListener('change', function(event) {
+    event.preventDefault();
+    loadData();
+});
+
+document.getElementById('sortMethod').addEventListener('change', function(event) {
+    event.preventDefault();
+    loadData();
+});
+
+
+
+</script>
+
+</div>
+</div>
+{% endblock %}
+

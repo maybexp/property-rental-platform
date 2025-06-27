@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+body{
+    background-color: #FBFAFA;
+}
+
+.container{
+    background-color: white;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    padding:10px 60px 40px 60px;
+    margin-bottom:50px;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 30px;
+    padding-top:20px;
+    padding-bottom: 10px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+    <h1>Vilkår for brug af Boligerne.dk 📝 </h1>
+
+    <h2>Indledning</h2>
+    <p>Disse vilkår og betingelser gælder for brugen af Boligerne.dk's tjenester. Ved at benytte tjenesterne accepterer du disse vilkår og betingelser.</p>
+
+    <h2>Ophavsret og ejendomsret</h2>
+    <p>Alt indhold på Boligerne.dk, herunder tekster, billeder, videoer og grafik, er beskyttet af ophavsretten og tilhører Boligerne.dk eller dets licensgivere.</p>
+
+    <h2>Brug af tjenesterne</h2>
+    <p>Brugen af Boligerne.dk's tjenester er underlagt følgende retningslinjer:</p>
+    <ul>
+        <li>Du skal bruge tjenesterne i overensstemmelse med gældende love og regler.</li>
+        <li>Du må ikke misbruge tjenesterne til ulovlige formål eller på en måde, der krænker andre brugeres rettigheder.</li>
+        <li>Du er ansvarlig for al aktivitet, der foregår under din konto.</li>
+    </ul>
+
+    <h2>Ansvarsfraskrivelse</h2>
+    <p>Boligerne.dk påtager sig intet ansvar for eventuelle fejl, mangler eller skader i forbindelse med brugen af tjenesterne.</p>
+
+    <h2>Ændringer i vilkårene</h2>
+    <p>Boligerne.dk forbeholder sig retten til at ændre disse vilkår og betingelser uden varsel. Det er dit ansvar at holde dig opdateret om eventuelle ændringer.</p>
+
+    <h2>Kontakt os</h2>
+    <p>Hvis du har spørgsmål eller kommentarer til disse vilkår og betingelser, er du velkommen til at kontakte os.</p>
+
+    <!--
+    <p>Vi ved, hvor vigtigt det er at beskytte boligsøgende fra falske annoncer, og derfor har vi implementeret en række sikkerhedsforanstaltninger for at gøre siden mere sikker.
+    <br>
+    <br>
+        Vi har et system der minimerer risikoen for at du bliver snydt. Samtidig bliver boliger manuelt gennemgået af en medarbejder før de lægges ud.
+    <br>
+    <br>
+        Det er dog stadig vigtigt at du som boligsøgende bruger din sunde fornuft, for at undgå at blive snydt.
+    <br>
+    <br>
+    Vi anbefaler derfor at du læser <a href="{% url 'tipsTilEnSikkerBolighandel' %}">denne</a> guide inden du går igang med din boligsøgning.
+    </p>
+    -->
+{% endblock %}

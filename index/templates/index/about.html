@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <style>
+    body{
+        /* background-color:#FBFAFA; */
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("{% static 'index/image3.jpg' %}");
+        background-size: 100% 430px;
+        background-repeat: no-repeat;
+        background-color:#FBFAFA;
+    }
+
+    .container{
+        box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+        padding:10px 20px;
+        margin-top: 70px;
+        border-radius:12px;
+        max-width:900px;
+        background-color: white;
+        padding:20px 30px 30px 30px;
+    }
+
+    h1{
+        font-weight:bold;
+        margin-top:20px;
+        padding:0px;
+        color:black;
+        text-align: center;
+        margin-bottom:20px;
+    }
+
+    a{
+        text-decoration-line: none;
+    }
+
+    .footer{
+        margin-top:100px;
+    }
+    </style>
+{% endblock %}
+
+{% block mobile %}
+    .container{
+    border-radius:0px;
+    }
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-8">
+        <h1>Om <span style="text-decoration-line: underline; text-decoration-color: #FE2C55">boligerne.dk</span></h1>
+        <p class="">Boligerne.dk har til formål at gøre det nemt og billigt at leje eller udleje sin bolig.
+            <br>
+            <br>
+            Vi mener at der skal gøres op med de dyre priser der er på de forskellige lejebolig-portaler.
+            <br>
+            <br>
+            <b>Brugerne i fokus</b>
+            <br style="margin-bottom:6px;">
+
+            En boligportal skal drives med brugerne i fokus. Derfor har vi gjort en stor indsats i at gøre dét, at leje
+            eller udleje en bolig, så simpelt som muligt. I den anledning er vi altid
+            åbne over for kritik eller forslag til hvordan hjemmesiden skal se ud.
+            <br>
+            <br>
+
+            Boligerne.dk er drevet af virksomheden Softology, som blev startet i 2023 af IT-studerende fra Copenhagen
+            Business Academy, hvorved sidens kontor også ligger.
+            <br>
+            <br>
+
+            <!--
+            Se vores andre sider:
+
+            <a href="https://www.fagord.dk/" target="_blank">
+                <img src="https://www.fagord.dk/static/index/images/images.png" alt="Fagord.dk's logo" style="width:200px;">
+            </a>
+            -->
+        </p>
+    </div>
+
+    <div class="col-sm-4">
+        <img src="{% static 'drawing.jpeg' %}" alt="ss" style="width:100%; padding-top: 100px;">
+    </div>
+</div>
+{% endblock %}
+

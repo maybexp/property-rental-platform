@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+
+{% block head %}
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+{% endblock %}
+
+{% block style %}
+<style>
+body{
+background-color: #F3F4F7;
+}
+
+.navbar-light, .bg-light, .navbar{
+    background-color: transparent !important;
+    box-shadow: none;
+}
+
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 308px;
+    height: 100%;
+    background-color: #FE2C55;
+    z-index: -1;
+}
+
+h1, h2{
+    font-size: 1.75rem;
+}
+
+.boligerneNavbar{
+    /* -webkit-text-stroke: 1px #FE2C55;
+        text-shadow: 3px 3px 20px #D3244D,
+    -2px 1px 30px black;
+    */
+    color: #A70A26 !important;
+
+}
+
+.container-fluid{
+    background-color: white;
+    padding:0px 0px 0px 0px;
+    width:100%;
+}
+
+.row{
+    background-color: #F3F4F7;
+}
+
+.col-md-4{
+    width:320px;
+    background-color: #FE2C55;
+    margin:0px;
+    padding-top:30px;
+    padding-bottom:200px;
+    padding-right:0px;
+}
+
+
+.list-group-item{
+    padding:10px 10px 10px 50px;
+    border:none;
+    background-color: transparent;
+}
+
+.list-group-item:hover{
+    background-color: transparent;
+    color:white;
+}
+
+.list-group a{
+    font-weight: bold;
+    border-radius:2px;
+    color:#B9C8F2;
+    font-size: .85rem;
+}
+
+.list-group .active {
+    background-color: #D3244D;
+}
+
+a{
+    text-decoration: none;
+}
+
+.content{
+    padding-left:30px;
+    padding-top:20px;
+    padding-bottom:200px;
+}
+
+.form-control:focus{
+    box-shadow: none;
+}
+
+.labelStyle {
+    font-weight: bold;
+    color:#767F7F;
+}
+
+.fullNameText{
+    font-size: 18px;
+}
+
+#password {
+  margin-bottom:10px;
+}
+
+
+#fullName{
+    margin-bottom:10px;
+}
+
+.saveBtn{
+    background-color:#FE2C55;
+    color:white;
+    display: block;
+    font-weight: bold;
+    border-radius: 12px;
+}
+
+.saveBtn:hover{
+    background-color: hsl(345, 95%, 45%);
+    color:white;
+}
+
+.changePasswordText{
+    text-decoration-line: underline;
+    font-size:25px;
+}
+
+
+/* bolig annonce */
+
+.squareMeterText{
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+.amountOfHomes{
+    color:#222222;
+}
+
+.boligAnnonce{
+    position: relative;
+    width:230px;
+    height:280px;
+    padding:0px;
+    margin-top:30px;
+    background-color: white;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    cursor: pointer;
+    border-radius:8px;
+}
+
+.address{
+    font-weight: bold;
+    padding:8px 4px 0px 10px;
+    margin-bottom: 0px;
+    font-size:15px;
+}
+
+.img-fluid {
+    height: 155px;
+    object-fit: cover;
+    border-radius:5px 5px 0px 0px;
+}
+
+.price{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin:0px 10px 3px 0px;
+    font-weight: bold;
+    font-size:17px;
+}
+
+#userinfo{
+    width:70%;
+}
+
+#userinfo input[type="text"]{
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important;
+}
+</style>
+{% endblock %}
+
+{% block containerFluid %}-fluid{% endblock %}
+{% block body %}
+  <div class="row">
+        <!-- Sidebar https://www.svgrepo.com/svg/513320/man?edit=true -->
+        <div class="col-md-4">
+            <div class="mx-auto text-center">
+                <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="82px" height="82px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="#506C7F" d="M18,12c0-5.522,4.478-10,10-10h8c5.522,0,10,4.478,10,10v7c0-3.313-2.687-6-6-6h-6c-2.209,0-4-1.791-4-4 c0-0.553-0.447-1-1-1s-1,0.447-1,1c0,2.209-1.791,4-4,4c-3.313,0-6,2.687-6,6V12z"></path> <path fill="#45AAB8" d="M62,60c0,1.104-0.896,2-2,2H4c-1.104,0-2-0.896-2-2v-8c0-1.104,0.447-2.104,1.172-2.828l-0.004-0.004 c4.148-3.343,8.896-5.964,14.046-7.714C20.869,45.467,26.117,48,31.973,48c5.862,0,11.115-2.538,14.771-6.56 c5.167,1.75,9.929,4.376,14.089,7.728l-0.004,0.004C61.553,49.896,62,50.896,62,52V60z"></path> <g> <path fill="#F9EBB2" d="M32,42c-2.853,0-5.502-0.857-7.715-2.322c-1.675,0.283-3.325,0.638-4.934,1.097 C22.602,43.989,27.041,46,31.973,46c4.938,0,9.383-2.017,12.634-5.238c-1.595-0.454-3.231-0.803-4.892-1.084 C37.502,41.143,34.853,42,32,42z"></path> <path fill="#F9EBB2" d="M46,22h-1c-0.553,0-1-0.447-1-1v-1v-1c0-2.209-1.791-4-4-4h-6c-2.088,0-3.926-1.068-5-2.687 C27.926,13.932,26.088,15,24,15c-2.209,0-4,1.791-4,4v1v1c0,0.553-0.447,1-1,1h-1c-0.553,0-1,0.447-1,1v2c0,0.553,0.447,1,1,1h1 c0.553,0,1,0.447,1,1v1c0,6.627,5.373,12,12,12s12-5.373,12-12v-1c0-0.553,0.447-1,1-1h1c0.553,0,1-0.447,1-1v-2 C47,22.447,46.553,22,46,22z"></path> </g> <path fill="#394240" d="M62.242,47.758l0.014-0.014c-5.847-4.753-12.84-8.137-20.491-9.722C44.374,35.479,46,31.932,46,28 c1.657,0,3-1.343,3-3v-2c0-0.886-0.391-1.673-1-2.222V12c0-6.627-5.373-12-12-12h-8c-6.627,0-12,5.373-12,12v8.778 c-0.609,0.549-1,1.336-1,2.222v2c0,1.657,1.343,3,3,3c0,3.932,1.626,7.479,4.236,10.022c-7.652,1.586-14.646,4.969-20.492,9.722 l0.014,0.014C0.672,48.844,0,50.344,0,52v8c0,2.211,1.789,4,4,4h56c2.211,0,4-1.789,4-4v-8C64,50.344,63.328,48.844,62.242,47.758z M18,12c0-5.522,4.478-10,10-10h8c5.522,0,10,4.478,10,10v7c0-3.313-2.687-6-6-6h-6c-2.209,0-4-1.791-4-4c0-0.553-0.447-1-1-1 s-1,0.447-1,1c0,2.209-1.791,4-4,4c-3.313,0-6,2.687-6,6V12z M20,28v-1c0-0.553-0.447-1-1-1h-1c-0.553,0-1-0.447-1-1v-2 c0-0.553,0.447-1,1-1h1c0.553,0,1-0.447,1-1v-2c0-2.209,1.791-4,4-4c2.088,0,3.926-1.068,5-2.687C30.074,13.932,31.912,15,34,15h6 c2.209,0,4,1.791,4,4v2c0,0.553,0.447,1,1,1h1c0.553,0,1,0.447,1,1v2c0,0.553-0.447,1-1,1h-1c-0.553,0-1,0.447-1,1v1 c0,6.627-5.373,12-12,12S20,34.627,20,28z M24.285,39.678C26.498,41.143,29.147,42,32,42s5.502-0.857,7.715-2.322 c1.66,0.281,3.297,0.63,4.892,1.084C41.355,43.983,36.911,46,31.973,46c-4.932,0-9.371-2.011-12.621-5.226 C20.96,40.315,22.61,39.961,24.285,39.678z M62,60c0,1.104-0.896,2-2,2H4c-1.104,0-2-0.896-2-2v-8c0-1.104,0.447-2.104,1.172-2.828 l-0.004-0.004c4.148-3.343,8.896-5.964,14.046-7.714C20.869,45.467,26.117,48,31.973,48c5.862,0,11.115-2.538,14.771-6.56 c5.167,1.75,9.929,4.376,14.089,7.728l-0.004,0.004C61.553,49.896,62,50.896,62,52V60z"></path> <path fill="#394240" d="M24.537,21.862c0.475,0.255,1.073,0.068,1.345-0.396C25.91,21.419,26.18,21,26.998,21 c0.808,0,1.096,0.436,1.111,0.458C28.287,21.803,28.637,22,28.999,22c0.154,0,0.311-0.035,0.457-0.111 c0.491-0.253,0.684-0.856,0.431-1.347C29.592,19.969,28.651,19,26.998,19c-1.691,0-2.618,0.983-2.9,1.564 C23.864,21.047,24.063,21.609,24.537,21.862z"></path> <path fill="#394240" d="M34.539,21.862c0.475,0.255,1.073,0.068,1.345-0.396C35.912,21.419,36.182,21,37,21 c0.808,0,1.096,0.436,1.111,0.458C38.289,21.803,38.639,22,39.001,22c0.154,0,0.311-0.035,0.457-0.111 c0.491-0.253,0.684-0.856,0.431-1.347C39.594,19.969,38.653,19,37,19c-1.691,0-2.618,0.983-2.9,1.564 C33.866,21.047,34.065,21.609,34.539,21.862z"></path> </g> </g></svg>
+            </div>
+                <p style="margin:6px 0px 20px 0px; font-weight: bold; text-align: center; color: white;">{{ user.get_full_name }}</p>
+            <hr style="width:30%;" class="mx-auto">
+            <div class="list-group">
+                <a href="#savedHomes" class="list-group-item list-group-item-action active" data-toggle="tab">
+                    <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#AF0D2A"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.89 5.87891H5.11C3.4 5.87891 2 7.27891 2 8.98891V20.3489C2 21.7989 3.04 22.4189 4.31 21.7089L8.24 19.5189C8.66 19.2889 9.34 19.2889 9.75 19.5189L13.68 21.7089C14.96 22.4089 16 21.7989 16 20.3489V8.98891C16 7.27891 14.6 5.87891 12.89 5.87891Z" fill="#AF0D2A"></path> <path d="M21.9998 5.11V16.47C21.9998 17.92 20.9598 18.53 19.6898 17.83L17.7598 16.75C17.5998 16.66 17.4998 16.49 17.4998 16.31V8.99C17.4998 6.45 15.4298 4.38 12.8898 4.38H8.81984C8.44984 4.38 8.18984 3.99 8.35984 3.67C8.87984 2.68 9.91984 2 11.1098 2H18.8898C20.5998 2 21.9998 3.4 21.9998 5.11Z" fill="#AF0D2A"></path> </g></svg>
+                    <span style="margin-left:1px;">Gemte boligannoncer</span></a>
+                <a href="#housingStatus" class="list-group-item list-group-item-action" data-toggle="tab">
+                    <svg fill="#AF0D2A" width="21px" height="21px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M13.5 2L3 14L3 46L24 46L24 14L13.5 2 z M 36.5 2L26 14L26 46L47 46L47 14L36.5 2 z M 7 18L11 18L11 23L7 23L7 18 z M 16 18L20 18L20 23L16 23L16 18 z M 30 18L34 18L34 23L30 23L30 18 z M 39 18L43 18L43 23L39 23L39 18 z M 7 27L11 27L11 32L7 32L7 27 z M 16 27L20 27L20 32L16 32L16 27 z M 30 27L34 27L34 32L30 32L30 27 z M 39 27L43 27L43 32L39 32L39 27 z M 7 36L11 36L11 41L7 41L7 36 z M 16 36L20 36L20 41L16 41L16 36 z M 30 36L34 36L34 41L30 41L30 36 z M 39 36L43 36L43 41L39 41L39 36 z"></path></g></svg>
+                    <span style="margin-left:1px;">Mine boligannoncer</span></a>
+                <a href="#userinfo" class="list-group-item list-group-item-action" id="userInfoLink" data-toggle="tab">
+                   <svg height="21px" width="21px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#AF0D2A"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M256,265.308c73.252,0,132.644-59.391,132.644-132.654C388.644,59.412,329.252,0,256,0 c-73.262,0-132.643,59.412-132.643,132.654C123.357,205.917,182.738,265.308,256,265.308z"></path> <path class="st0" d="M425.874,393.104c-5.922-35.474-36-84.509-57.552-107.465c-5.829-6.212-15.948-3.628-19.504-1.427 c-27.04,16.672-58.782,26.399-92.819,26.399c-34.036,0-65.778-9.727-92.818-26.399c-3.555-2.201-13.675-4.785-19.505,1.427 c-21.55,22.956-51.628,71.991-57.551,107.465C71.573,480.444,164.877,512,256,512C347.123,512,440.427,480.444,425.874,393.104z"></path> </g> </g></svg>
+                    ️ <span style="margin-left:-6px;">Min konto</span></a>
+                <a href="#password" class="list-group-item list-group-item-action" data-toggle="tab">
+                    <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21px" height="21px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#AF0D2A"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#AF0D2A" d="M45.863,33.863C47.223,30.852,48,27.52,48,24C48,10.746,37.254,0,24,0S0,10.746,0,24s10.746,24,24,24 c3.52,0,6.852-0.777,9.863-2.137L36,48h8v8h8v8h12V52L45.863,33.863z M24,32c-4.422,0-8-3.578-8-8s3.578-8,8-8s8,3.578,8,8 S28.422,32,24,32z"></path> </g></svg>
+                    Ændre kodeord</a>
+            </div>
+        </div>
+
+        <!-- Tab content -->
+        <div class="col-md-8 content">
+            <div class="tab-content">
+                <div class="tab-pane active" id="savedHomes">
+                    <h1>Gemte boliger</h1>
+                    <div class="row">
+                        {% if apartments %}
+                            {% for apartment in apartments %}
+                                <div class="col-sm-3 boligAnnonce" style="margin-left:20px;"
+                                     onclick="window.location.href='{% url 'rentalApartment' apartment.rentalApartment.id %}'">
+                                    <img src="{{ apartment.rentalApartment.apartmentimage_set.first.images.url }}"
+                                         class="img-fluid" alt="">
+                                    <h2 class="address">{{ apartment.rentalApartment.title|slice:":20" }}..</h2>
+                                    <small style="padding-left: 10px;">{{ apartment.rentalApartment.type }}</small>
+                                    <div class=""
+                                         style="padding-left: 8px; padding-bottom: 5px; font-size:14px; position: absolute; bottom:20px;">
+                                        <img src="https://www.lejebolig.dk/Content/2015/Images/tinypng/resultat-stat-areal-light.png"
+                                             style="width:20px;">
+                                        <span>{{ apartment.rentalApartment.size }}</span>
+                                        <br>
+                                        <img src="https://www.lejebolig.dk/Content/2015/Images/tinypng/resultat-stat-vaerelser-light.png"
+                                             style="width:20px;">
+                                        <span>{{ apartment.rentalApartment.rooms }} vær.</span>
+                                    </div>
+
+                                    <p class="price">{{ apartment.rentalApartment.monthlyRent }} kr.</p>
+                                    <p style="display:block; color:#8B8B8B; float:left; font-size:10px; position: absolute; bottom:0px; margin:0px 0px 4px 5px; padding-left: 5px;">
+                                        {{ apartment.rentalApartment.timestamp |timesince }} siden</p>
+                                </div>
+                            {% endfor %}
+
+                        {% else %}
+                            <p>Ingen gemte boligannoncer 😟</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="housingStatus">
+                    <h2>Dine boligannoncer</h2>
+                    <div class="row">
+                        {% if createdApartments %}
+                            {% for apartment in createdApartments %}
+                                <div class="col-sm-3 boligAnnonce" style="margin-left:20px;"
+                                     onclick="window.location.href='{% url 'rentalApartment' apartment.id %}'">
+                                    <img src="{{ apartment.apartmentimage_set.first.images.url }}"
+                                         class="img-fluid" alt="">
+                                    <h2 class="address">{{ apartment.title|slice:":20" }}..</h2>
+                                    <small style="padding-left: 10px;">{{ apartment.type }}</small>
+                                    <div class=""
+                                         style="padding-left: 8px; padding-bottom: 5px; font-size:14px; position: absolute; bottom:20px;">
+                                        <img src="https://www.lejebolig.dk/Content/2015/Images/tinypng/resultat-stat-areal-light.png"
+                                             style="width:20px;">
+                                        <span>{{ apartment.size }}</span>
+                                        <br>
+                                        <img src="https://www.lejebolig.dk/Content/2015/Images/tinypng/resultat-stat-vaerelser-light.png"
+                                             style="width:20px;">
+                                        <span>{{ apartment.rooms }} vær.</span>
+                                    </div>
+
+                                    <p class="price">{{ apartment.monthlyRent }} kr.</p>
+                                    <p style="display:block; color:#8B8B8B; float:left; font-size:10px; position: absolute; bottom:0px; margin:0px 0px 4px 5px; padding-left: 5px;">
+                                        {{ apartment.timestamp |timesince }} siden</p>
+                                </div>
+                            {% endfor %}
+
+                        {% else %}
+                            <p>Du udlejer ingen boliger 😟</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- User info tab -->
+                <div class="tab-pane" id="userinfo">
+                    <h2>Min konto⚙️</h2>
+
+                    <p class="fullNameText"><span style="font-weight: bold;">Fulde navn: </span>{{ user.get_full_name }}</p>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% else %}
+                                <div class="alert alert-success">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" action="{% url 'updateUserInfo' %}">
+                        {% csrf_token %}
+                        <label for="fullName" class="labelStyle">Fulde navn</label>
+                        <br>
+                        <input type="text" placeholder="Fornavn" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" required class="form-control" id="fullName" name="firstName">
+                        <input type="text" placeholder="Efternavn" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" required class="form-control" id="fullName" name="lastName">
+                        <input type="submit" value="Gem ændringer 💾" class="btn btn-default mx-auto saveBtn">
+                    </form>
+                </div>
+
+
+                <div class="tab-pane" id="password">
+                    <a href="{% url 'password_change' %}" class="changePasswordText">Skift kodeord</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+  if (window.location.hash === '#userInfo') {
+    var link = document.getElementById('userInfoLink');
+    link.click();
+  }
+});
+</script>
+
+{% endblock %}

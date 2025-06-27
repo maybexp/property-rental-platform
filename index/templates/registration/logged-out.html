@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 30px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .loggedOutText {
+        color: rgb(0, 120, 130);
+        font-size: 20px;
+        margin-bottom: 8px;
+        font-weight: bold;
+        display: inline-block;
+        text-decoration-line: none;
+        margin-bottom: 120px;
+    }
+
+    #hand {
+        font-size:25px;
+    }
+
+
+    a{
+      text-decoration-line: none;
+        color:#007882;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <p id="hand">🖐️</p>
+    <h1>Du er nu logget ud</h1>
+    <p class="loggedOutText">
+        <svg role="img" aria-label="" style="width:20px; height:20px;" aria-hidden="true" class="svg"
+             viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.716 17.1l5.11 5.776-1.993 1.763-7.725-8.731 7.693-9.005 2.022 1.728-4.963 5.81h16.385v2.66H9.715z"
+                  fill="#007882"></path>
+        </svg>
+        <a href="{% url 'index' %}">Gå til forsiden</a>
+    </p>
+
+{% endblock %}

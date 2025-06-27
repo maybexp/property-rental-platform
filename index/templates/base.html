@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="da" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Boligerne.dk</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'boligernelogo.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!--
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    {% block head %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    {% endblock %}
+    <style>
+        body{
+            font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            width: 100%;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        .navbar{
+        /*             border-bottom: 1px solid rgba(34, 25, 25, 0.4); */
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 5px;
+            padding:5px 0px;
+            {% block navbarStyles %}
+            {% endblock %}
+        }
+
+        .boligerneNavbar{
+            font-size:26px;
+            font-weight: bold;
+            margin-left: 30px;
+            color:#FE2C55;
+            border-radius:0px;
+            padding:1px;
+            font-family: "Comic Sans MS", cursive;
+        }
+
+        .boligerneNavbar:hover, .boligerneNavbar:focus{
+            color:#FE2C55;
+        }
+
+        .outerFooter {
+            box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+        }
+
+        .footer{
+            background-color:#F7F6F5;
+            margin:0px;
+            color:#322744;
+            padding: 40px 0px 15px 0px;
+        }
+
+        .footer h4{
+            font-size:18px;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #888;
+            font-size: 14px;
+            margin-left:28px;
+        }
+    </style>
+
+    {% block style %}
+    {% endblock %}
+
+    <style>
+        @media only screen and (max-width:768px){
+        {% block mobile %}
+
+        {% endblock %}
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand mb-0 h1 boligerneNavbar" href="{% url 'index' %}">Boligerne</a>
+<!--
+<img src="" alt="" style="width:20px; vertical-align: middle; margin-bottom: 5px; margin-right:3px;">
+-->
+    <div class="d-flex justify-content-end navbarUserForm">
+        <div style="display:flex;align-items:center;">
+            <a href="{% url 'createHousingPost' %}" class="btn btn-sm btn-primary navbar-link"
+               style="padding:8px; background-color: #26A574; font-weight: bold; border-radius: 8px; border-color:#26A574; margin-right: 50px;">Udlej din bolig gratis
+                <!--      <span style="padding:0px; vertical-align: 2px;">👈</span> -->
+            </a>
+        </div>
+
+        <div class="btn-group" role="group">
+            {% if user.is_authenticated %}
+                <a class="btn btn-sm btn-primary navbar-link mb-0" href="{% url 'myAccount' %}" style="border-color: #CDD1D4; height:40px; font-weight: bold; padding:8px 16px; font-size:16px; color: #3B4144; background-color:white; border-radius: 8px 0px 0px 8px;">Min konto</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-sm btn-primary navbar-link mb-0" href="{% url 'logout' %}" style="border-color: #CDD1D4; height:40px; font-weight: bold; padding:8px 16px; font-size:16px; color: #3B4144; background-color:white; border-radius: 0px 8px 8px 0px; margin-right:20px;" value="Log ud">
+            </form>
+            {% else %}
+                <a class="btn btn-sm btn-primary navbar-link mb-0" href="{% url 'login' %}" style="border-color: #CDD1D4; height:40px; font-weight: bold; padding:8px 16px; font-size:16px; color: #3B4144; background-color:white; border-radius: 8px 0px 0px 8px;">Log ind</a>
+                <a class="btn btn-sm btn-primary navbar-link mb-0" href="{% url 'signup' %}" style="border-color: #CDD1D4; height:40px; font-weight: bold; padding:8px 16px; font-size:16px; color: #3B4144; background-color:white; border-radius: 0px 8px 8px 0px; margin-right:20px;">Opret bruger</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% block outsideContainerAboveBody %}
+{% endblock %}
+
+<div class="container{% block containerFluid %}{% endblock %}">
+
+{% block body %}
+{% endblock %}
+</div>
+
+{% block outsideContainer %}
+{% endblock %}
+
+<div class="outerFooter">
+    <footer class="text-center footer">
+        <div class="row mx-auto" style="max-width:550px;">
+            <div class="col-sm-6" style="text-align: left">
+                <h4 style="text-align: center">Sikkerhed</h4>
+                <a href="{% url 'tipsTilEnSikkerBolighandel' %}">Tips til en sikker bolighandel</a>
+                <br>
+                <a href="{% url 'anmeldSnyd' %}">Anmeld snyd</a>
+            </div>
+
+            <div class="col-sm-6" style="text-align: left; ">
+                <h4 style="text-align: center">Kontakt & om os</h4>
+                <a href="{% url 'customerService' %}" style="padding-left:23px">Kundeservice</a>
+                <br>
+                <a href="{% url 'privacyPolicy' %}" style="padding-left:23px;">Privatlivspolitik</a>
+                <br>
+                <a href="{% url 'about' %}" style="padding-left:23px;">Om boligerne.dk</a>
+            </div>
+
+        </div>
+        <hr style="width:25%;" class="mx-auto">
+        <p style="margin:0px; color: #888; padding-top:15px; padding-left:30px; padding-bottom: 5px; font-size:16px;"><small>boligerne.dk ©
+            2023</small></p>
+        <a href="#" style="color:#0D6EFD; " target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook"
+                 viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+            </svg>
+        </a>
+
+
+    </footer>
+
+    <img src="{% static 'footer-art.png' %}" type="image/svg+xml" alt="Footer art" focusable="false" class="pfs__kizoah-0 gzmHID" width="1200" height="160" style="background-color: #F7F6F5;">
+</div>
+</body>
+</html>

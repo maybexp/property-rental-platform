@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+{% load static %}
+<!--
+
+https://github.com/JonKaric/head/blob/master/index.html
+
+ -->
+
+{% block style %}
+    <style>
+
+    body{
+        /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.ctfassets.net/mivicpf5zews/5UVI6GzhTikSirjufwpNGS/855fb599b2330ee51cc470af91158a1c/Copenhagen2.jpg?q=75"); */
+        /*background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("https://a.travel-assets.com/findyours-php/viewfinder/images/res70/504000/504188-copenhagen-city-centre.jpg");
+        */
+
+    /*background-color: #FBFAFA;*/
+    }
+
+    .navbar{
+        /*
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 10px;
+         */
+
+    }
+
+.mainContent{
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url("https://a.travel-assets.com/findyours-php/viewfinder/images/res70/504000/504188-copenhagen-city-centre.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width:99%;
+    height:38vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-radius:10px;
+}
+
+h1 {
+    font-family: Verdana;
+    text-align: center;
+    margin: 100px auto 0;
+    display: table;
+    font-size: 50px;
+    text-shadow: 0 0px 5px rgba(0, 0, 0, 1);
+
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.searchForm{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.searchBar{
+    height:50px;
+    font-size: 20px;
+    width:450px;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.searchBar:focus{
+    height:50px;
+    box-shadow: none;
+    border:1px solid #DEE2E6;
+}
+
+.searchBar::placeholder{
+    color:#A9A9A9;
+}
+
+#searchDropdown{
+    background-color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    position: absolute;
+    width:100%;
+}
+
+#searchDropdown .dropdown-item{
+    padding:8px;
+}
+
+#searchDropdown .dropdown-item:hover {
+    background-color: #f2f2f2;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+
+#searchBtn:hover{
+    cursor: pointer;
+}
+
+
+.cities{
+    border:1px solid #D93C23;
+    border-radius: 10px;
+    background-color: #D93C23;
+    padding:5px 14px 5px 14px;
+    text-decoration-line: none;
+    color:white;
+}
+
+.cities:hover{
+    background-color: hsl(345, 95%, 45%);
+    color:white;
+}
+
+select{
+    height:35px;
+}
+
+.footer{
+    margin-top:100px;
+}
+    </style>
+{% endblock %}
+
+{% block mobile %}
+    h1{
+    font-size:32px;
+    margin-top:30px;
+    margin-bottom:0px;
+    padding-bottom:0px;
+    }
+
+    .container-fluid{
+    padding:0px;
+    }
+    .mainContent{
+    height:300px;
+    width:100%;
+    margin-top:0px;
+border-radius:0px;
+    }
+
+    .searchBar{
+    width:100%;
+    margin-top:0px;
+    }
+
+    .cities{
+    padding:4px 12px;
+    }
+
+    .aalborg{
+    display:none;
+    }
+
+    .moreInfo{
+    margin-top:2%;
+    }
+
+{% endblock %}
+
+{% block containerFluid %}-fluid{% endblock %}
+
+{% block body %}
+<div class="mainContent">
+    <h1>5.089 ledige lejeboliger️</h1>
+
+    <div class="input-group mb-3 mx-auto searchForm">
+      <div class="position-relative">
+          <form method="post" action="{% url 'searchUsingInput' %}">
+              {% csrf_token %}
+              <input type="text" placeholder="Hvilken by vil du gerne bo?" autofocus class="form-control mx-auto searchBar" autocomplete="off" aria-label="Text input with dropdown button" id="searchInput" name="cityName">
+              <div id="searchDropdown"></div>
+          </form>
+      </div>
+      <div class="input-group-append" id="searchBtn">
+          <span class="input-group-text" id="basic-addon2" style="border-radius: 0px 8px 8px 0px;height:50px; background-color: #D93C23; border:1px solid #D93C23; color:white;">
+              <svg id="expanded" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="w-4 h-4 lg:w-6 lg:h-6 sm:w-6 sm:h-6"><path fill="currentColor" d="M22.21,20.79,17,15.61A9,9,0,1,0,15.61,17l5.18,5.18ZM3,10a7,7,0,1,1,7,7A7,7,0,0,1,3,10Z"></path></svg>
+          </span>
+      </div>
+    </div>
+
+    <div class="text-center allCities">
+        <a href="{% url 'search' cityName='koebenhavn-v' %}" class="cities">København V</a>
+        <a href="{% url 'search' cityName='aarhus' %}" class="cities">Aarhus</a>
+        <a href="{% url 'search' cityName='aalborg' %}" class="cities aalborg">Aalborg</a>
+        <a href="{% url 'search' cityName='odense' %}" class="cities">Odense</a>
+    </div>
+</div>
+
+<noscript>
+        <div style="background-color: #f8d7da; margin-left:auto;margin-right:auto; color: #721c24; padding: 10px;width:500px; margin-bottom:30px;">
+            <h3 style="font-size:20px;">OBS! Det ser ud til, at du har slået JavaScript fra.</h3>
+            <p style="font-size:small;">Denne hjemmeside kræver JavaScript for at fungere korrekt.
+                <br><br>Slå venligst JavaScript til i din browser eller skift til en browser, der understøtter JavaScript, for at fortsætte med at bruge vores hjemmeside.
+                <br>
+                <br>
+                Hvis du ikke ved hvordan du slår Javascript til kan du følge denne <a href="https://www.enable-javascript.com/" target="_blank">guide</a>.
+            </p>
+        </div>
+    </noscript>
+
+    <br>
+
+    <div class="text-center moreInfo ">
+        <h2 style="font-size: 30px; margin-top: 20px;">👉Udlej din bolig gratis</h2>
+        <p style="font-size: 20px; margin-bottom: 20px;">- på Danmarks nye gratis boligportal</p>
+        <a href="{% url 'createHousingPost' %}" class="btn btn-lg btn-success mr-3" style="background-color: #25A171; border-radius: 5px; border-color: #25A171;">Udlej bolig gratis 🏘️</a>
+        {% if user.is_authenticated %}
+        {% else %}
+            <a href="{% url 'signup' %}" class="btn btn-lg btn-success mr-3" style="background-color: #25A171; border-radius: 5px; border-color: #25A171;">Opret bruger 🙋‍♂️ </a>
+        {% endif %}
+    </div>
+
+
+
+    <!--
+    <div class="row" style="margin-top:10px; box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);">
+        <h2 class="mt-4 mb-3">Kategorier:</h2>
+        <div class="col-md-3">
+            <button class="btn btn-lg btn-outline-secondary mb-3" style="width: 100%;">Lejligheder</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-lg btn-outline-secondary mb-3" style="width: 100%;">Værelser</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-lg btn-outline-secondary mb-3" style="width: 100%;">Huse</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-lg btn-outline-secondary mb-3" style="width: 100%;">Rækkehuse</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-lg btn-outline-secondary mb-3" style="width: 100%;">Rækkehuse</button>
+        </div>
+    </div>
+
+    -->
+
+
+    <script>
+        function slugify(str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim leading/trailing white space
+            str = str.toLowerCase(); // convert string to lowercase
+            str = str.replace(/[^a-z0-9æøå -]/g, '') // remove any non-alphanumeric characters except 'æ', 'ø', 'å'
+                .replace(/\s+/g, '-') // replace spaces with hyphens
+                .replace(/-+/g, '-'); // remove consecutive hyphens
+            str = str.replace(/æ/g, 'ae'); // replace 'æ' with 'ae'
+            str = str.replace(/ø/g, 'oe'); // replace 'ø' with 'oe'
+            str = str.replace(/å/g, 'aa'); // replace 'å' with 'aa'
+            return str;
+        }
+
+
+        const searchInput = document.getElementById('searchInput');
+        const searchDropdown = document.getElementById('searchDropdown');
+        const baseUrl = '/lejebolig/';
+        let firstResult = "";
+
+        searchInput.addEventListener('input', (event) => {
+            const searchTerm = event.target.value;
+            if(searchInput.value === ""){
+                firstResult = "";
+            }
+            if (searchTerm.length < 2) {
+                searchDropdown.style.display = 'none';
+                searchInput.style.borderBottomLeftRadius = "8px";
+                return;
+            }
+
+            fetch(`https://api.dataforsyningen.dk/postnumre?q=${searchTerm}*`)
+                .then(response => response.json())
+                .then(data => {
+                    searchDropdown.innerHTML = '';
+                    const uniqueNames = new Set();
+
+                    data.forEach(result => {
+                        const name = result.navn;
+                        if (!uniqueNames.has(name)) {
+                            uniqueNames.add(name);
+
+                            if (!firstResult) {
+                                firstResult = name;
+                            }
+                            const resultItem = document.createElement('a');
+                            resultItem.classList.add('dropdown-item');
+                            resultItem.textContent = name;
+                            resultItem.addEventListener('click', () => {
+                                searchInput.value = name;
+                                searchDropdown.style.display = 'none';
+
+                                let selectedValue = resultItem.innerText.toLowerCase();
+                                let slugify = selectedValue.replaceAll("æ", "ae");
+                                slugify = slugify.replaceAll("ø", "oe");
+                                slugify = slugify.replaceAll("å", "aa");
+                                slugify = slugify.replaceAll(" ", "-");
+
+                                let newUrl = baseUrl + slugify;
+                                window.location.href = newUrl;
+                            });
+                            searchInput.style.borderBottomLeftRadius = "0px";
+                            searchDropdown.appendChild(resultItem);
+                        }
+                    });
+
+                    if (uniqueNames.size > 0) {
+                        searchDropdown.style.display = 'block';
+                    } else {
+                        searchDropdown.style.display = 'none';
+                    }
+
+                    firstResult = uniqueNames.values().next().value;
+                });
+        });
+
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if(searchInput.value.trim() === ""){
+                return;
+            }
+            window.location.href = baseUrl + slugify(firstResult);
+        });
+
+        document.getElementById("searchBtn").addEventListener("click", function () {
+            if (searchInput.value.trim() === "") {
+                return;
+            }
+            let url = "/lejebolig/" + slugify(firstResult);
+            window.location.href = url;
+        })
+
+
+
+    </script>
+{% endblock %}

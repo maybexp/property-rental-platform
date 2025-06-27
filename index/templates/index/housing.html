@@ -1,0 +1,739 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <style>
+        .container {
+            /*         box-shadow: 0 0 1px rgba(34, 25, 25, 0.4); */
+            padding: 0px;
+            max-width: 85%;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 28px;
+            margin-top:5px;
+            margin-bottom: 0px;
+        }
+
+        h2 {
+            font-size: 25px;
+            font-weight: bold;
+            padding-bottom: 4px;
+            /*
+                border-bottom: 1px solid #FE2C55;
+            display: inline-block;
+            */
+            margin-top: 20px;
+        }
+
+        .housingImage {
+            width: 75%;
+            padding-right:8px;
+            max-height: 280px;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+
+        .saveImg{
+            float:right;
+            display: inline-block;
+            margin:0px 15px 0px 0px;
+            fill:none;
+        }
+
+        .saveImg:hover{
+            cursor: pointer;
+            fill: #FE2C55;
+        }
+
+        .timestamp {
+            font-size: small;
+            color: grey;
+            font-style: italic;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .price {
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+
+        .contactOwnerBtn {
+            background-color: #FE2C55;
+            color:white;
+            border: 1px solid #FE2C55;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            margin-top:25px;
+            font-weight: bold;
+            margin-left:17px;
+        }
+
+        .contactOwnerBtn:hover {
+            background-color: hsl(345, 95%, 45%);
+            color: white;
+        }
+
+        .container .btn-default:active{
+            background-color:#FE2C55;
+            color:white;
+        }
+
+        .mainContent{
+            display: flex;
+        }
+
+        .information {
+            padding: 10px;
+            width:100%;
+        }
+
+        .rightRow{
+            width:317px;
+            height:170px;
+            box-shadow:rgba(59, 65, 68, 0.18) 0px 17px 21px -1px;
+            border:1px solid #E8E8EA;
+            border-radius: 8px;
+            float:right;
+            margin-top:10px;
+            margin-right:20px;
+            padding:0px 16px 16px 16px;
+        }
+
+        .details {
+            padding: 10px;
+        }
+
+        .detailsOfApartmentFirst{
+            border:1px solid rgb(232, 233, 234);
+            border-right: 0px;
+            border-radius: 8px;
+            padding:16px;
+        }
+
+        .detailsOfApartmentSecond{
+            border:1px solid rgb(232, 233, 234);
+            border-left: 0px;
+            border-radius: 8px;
+            padding:16px;
+        }
+
+        /*   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); */
+
+        .detailsOfLandlord{
+            padding:16px;
+            border:1px solid rgb(232, 233, 234);
+            border-radius: 8px;
+            max-width:450px;
+        }
+
+        .detailsOfLandlord table {
+            border-collapse: collapse; /* to remove the default space between cells */
+        }
+
+        .detailsOfLandlord td:first-child {
+            border-left: 3px solid #FE2C55;
+            padding-left: 10px;
+        }
+
+        .details span {
+            float: right;
+            font-weight: bold;
+        }
+
+        .details td{
+            padding-right:15px;
+        }
+
+        table td:nth-child(even) {
+            font-weight: bold;
+        }
+
+        .detailsOfApartmentFirst tr td:first-child {
+            padding-right: 4px;
+        }
+
+        .detailsOfApartmentSecond tr td:first-child {
+            padding-right: 4px;
+        }
+
+        .report{
+            float:right;
+        }
+        .modal-image {
+        height: 70%;
+        }
+
+    .modal {
+        --bs-modal-margin: 0px !important;
+    }
+
+    /* */
+
+        .myTooltip, .myTooltipPhoneNumber{
+  position: relative;
+  display: inline-block;
+}
+
+         #myInput:focus{
+            box-shadow: none;
+        }
+
+.myTooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.myTooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.myTooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.myTooltipPhoneNumber .tooltiptextPhoneNumber {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.myTooltipPhoneNumber .tooltiptextPhoneNumber::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.myTooltipPhoneNumber:hover .tooltiptextPhoneNumber {
+  visibility: visible;
+  opacity: 1;
+}
+    </style>
+{% endblock %}
+
+
+{% block body %}
+
+    {% if user.is_authenticated %}
+    <script>
+        function saveApartment() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/save-apartment-ajax/" + '{{ rentalApartment.id }}', true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var vectorElement = document.getElementById("Vector");
+
+                    if (response.message === "Saved") {
+                        vectorElement.style.fill = "#FE2C55";  // Red color
+                    } else if (response.message === "Removed") {
+                        vectorElement.style.fill = "#FFFFFF";  // White color
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        function reportRentalApartment() {
+            var title = document.getElementById("reportTitle");
+            var reason = document.getElementById("reportReason");
+            var reportSentMessage = document.getElementById("reportSentMessage");
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/report-rental-apartment-ajax/" + '{{ rentalApartment.id }}', true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var reportBtn = document.getElementById("reportBtn");
+                    reportBtn.style.display = "none";
+
+                    title.style.display = "none";
+                    reason.style.display = "none";
+                    reportSentMessage.style.display = "block";
+
+                    const modalBody = document.querySelector('.modal-body');
+                    const formLabels = modalBody.querySelectorAll('.form-label');
+
+                    formLabels.forEach((label) => {
+                        label.style.display = "none";
+                    });
+                }
+            };
+
+            var data = "title=" + encodeURIComponent(title.value) + "&reason=" + encodeURIComponent(reason.value);
+
+            xhr.send(data);
+        }
+
+    </script>
+    {% endif %}
+    <div>
+        <a style="color:#D3244D; font-size: 14px; line-height: 1.43; margin-bottom:0px;  padding:5px; font-weight: bold; display: inline-block; text-decoration-line: none;" href="{% url 'search' 'Lyngby' %}">
+            <svg role="img" aria-label="" style="width:15px; height:15px;" aria-hidden="true" class="svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M9.716 17.1l5.11 5.776-1.993 1.763-7.725-8.731 7.693-9.005 2.022 1.728-4.963 5.81h16.385v2.66H9.715z" fill="#D3244D"></path></svg>
+            Tilbage til søgning
+        </a>
+        <div style="display: flex;">
+            <img src="{{ images.0.images.url }}" style="cursor: pointer;" alt="" class="housingImage" data-bs-toggle="modal"
+                 data-bs-target="#imageModal">
+            <div style="display: flex; flex-direction: column; width: 25%;">
+                {% for image in images|slice:"1:3" %}
+                    {% if forloop.first %}
+                        <img src="{{ image.images.url }}"
+                             alt=""
+                             style="object-fit: cover; cursor: pointer; padding-bottom: 3px; height: 140px; border-top-right-radius: 8px;"
+                             data-bs-toggle="modal" data-bs-target="#imageModal">
+                    {% elif forloop.last %}
+                        <img src="{{ image.images.url }}"
+                             alt=""
+                             style="object-fit: cover; cursor: pointer; padding-top: 3px; max-height: 140px; border-bottom-right-radius: 8px;"
+                             data-bs-toggle="modal" data-bs-target="#imageModal">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Modal -->
+<!-- Add the necessary Bootstrap and jQuery scripts and stylesheets to your template -->
+
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body p-0"> <!-- Add the 'p-0' class to remove the padding -->
+                <div id="imageCarousel" class="carousel slide">
+                    <ol class="carousel-indicators">
+                        {% for image in images %}
+                            <li data-bs-target="#imageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in images %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.images.url }}" alt="" class="d-block w-100 modal-image">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <div class="mainContent" >
+        <div class="information">
+            {% if user.is_authenticated %}
+                {% if isSaved %}
+                    <svg class="saveImg" width="28px" height="28px;" viewBox="0 0 24 24" onclick="saveApartment()"
+                         xmlns="http://www.w3.org/2000/svg" stroke="#D01406">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g id="Interface / Heart_01">
+                                <path id="Vector"
+                                      d="M12 7.69431C10 2.99988 3 3.49988 3 9.49991C3 15.4999 12 20.5001 12 20.5001C12 20.5001 21 15.4999 21 9.49991C21 3.49988 14 2.99988 12 7.69431Z"
+                                      stroke="#FE2C55" fill="#FE2C55" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </g>
+                        </g>
+                    </svg>
+                {% else %}
+                    <svg class="saveImg" width="28px" height="28px;" viewBox="0 0 24 24" onclick="saveApartment()"
+                         xmlns="http://www.w3.org/2000/svg" stroke="#D01406">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g id="Interface / Heart_01">
+                                <path id="Vector"
+                                      d="M12 7.69431C10 2.99988 3 3.49988 3 9.49991C3 15.4999 12 20.5001 12 20.5001C12 20.5001 21 15.4999 21 9.49991C21 3.49988 14 2.99988 12 7.69431Z"
+                                      stroke="#FE2C55" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </g>
+                        </g>
+                    </svg>
+                {% endif %}
+            {% endif %}
+            <h1>{{ rentalApartment.title }}</h1>
+            <p style="font-size:16px; margin-top:0px; color:#3B4144;display: inline;">{{ rentalApartment.address }}</p>
+            <p class="timestamp" style="margin-top:4px;">{{ rentalApartment.timestamp | timesince }} siden</p>
+            <br>
+
+            <p>{{ rentalApartment.description|linebreaksbr }}</p>
+        </div>
+
+
+
+        <div class="rightRow">
+            <p style="margin:10px 0px 0px 0px;padding:0px;">💰 <span
+                    class="price">{{ rentalApartment.monthlyRent }} kr/md</span></p>
+            <img src="https://www.lejebolig.dk/Content/2015/Images/tinypng/resultat-stat-areal-light.png"
+                 style="width:20px; marign-top:0px;">
+            <span style="margin-top: 0px;">{{ rentalApartment.size }}</span>
+            <br>
+            <img src="https://www.lejebolig.dk/Content/2015/Images/tinypng/resultat-stat-vaerelser-light.png"
+                 style="width:20px;">
+            <span>{{ rentalApartment.rooms }} vær.</span>
+            <br>
+            {% if user.is_authenticated %}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-default contactOwnerBtn" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                    Kontakt udlejer gratis
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="margin-top:70px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Kontakt udlejer</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {% if rentalApartment.phoneNumber %}
+                                    <label for="myInputPhoneNumber" style="font-weight: bold;">Telefonnummer: </label>
+                                    <input type="text" value="{{ rentalApartment.phoneNumber}}" id="myInputPhoneNumber" class="form-control form-control-sm" style="width:50%;display: inline-block">
+
+                                    <div class="myTooltipPhoneNumber d-inline-block">
+                                        <button onclick="myFunctionPhoneNumber()" onmouseout="outFuncPhoneNumber()"
+                                                class="btn btn-sm btn-primary" style="margin-top:-1px;">
+                                            <span class="tooltiptextPhoneNumber" id="myTooltipPhoneNumber">Kopier</span>
+                                            Kopier
+                                        </button>
+                                    </div>
+                                {% endif %}
+
+                                <br>
+                                <br>
+                                <label for="myInput" style="font-weight: bold;">Email: </label>
+                                <input type="text" value="{{ rentalApartment.email}}" id="myInput" class="form-control form-control-sm" style="width:50%;display: inline-block">
+
+                                <div class="myTooltip">
+                                    <button onclick="myFunction()" onmouseout="outFunc()" class="btn btn-sm btn-primary" style="margin-top:-1px;">
+                                        <span class="tooltiptext" id="myTooltip">Kopier</span>
+                                        Kopier
+                                    </button>
+                                </div>
+                                <br>
+                                <br>
+                                <p><i><small>Brug din sunde fornuft, følg <a
+                                        href="{% url 'tipsTilEnSikkerBolighandel' %}" target="_blank">vores tips </a>til
+                                    en sikker bolighandel.</small></i></p>
+
+                            <script>
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Kopieret";
+}
+
+function outFunc() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Kopier";
+}
+
+function myFunctionPhoneNumber() {
+  var copyText = document.getElementById("myInputPhoneNumber");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+
+  var tooltip = document.getElementById("myTooltipPhoneNumber");
+  tooltip.innerHTML = "Kopieret";
+}
+
+function outFuncPhoneNumber() {
+  var tooltip = document.getElementById("myTooltipPhoneNumber");
+  tooltip.innerHTML = "Kopier";
+}
+</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-default contactOwnerBtn">Kontakt udlejer gratis</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div style="max-width:74%; margin-bottom: 20px; margin-top:30px; height: 200px;">
+        {{ html_map|safe }}
+    </div>
+
+    <div class="details">
+        <h2>Detaljer om boligen</h2>
+        <div class="row detailsOfApartment">
+            <div class="col-md-4 detailsOfApartmentFirst">
+                <table>
+                    <tr>
+                        <td>🏘️</td>
+                        <td>Boligtype:</td>
+                        <td>{{ rentalApartment.type }}</td>
+                    </tr>
+                    <tr>
+                        <td>📏</td>
+                        <td>Størrelse:</td>
+                        <td>{{ rentalApartment.size }} m²</td>
+                    </tr>
+                    <tr>
+                        <td>&#x1F6CC;</td>
+                        <td>Værelser:</td>
+                        <td>{{ rentalApartment.rooms }}</td>
+                    </tr>
+                    <tr>
+                        <td>🪑</td>
+                        <td>Møbleret:</td>
+                        <td>
+                            {% if rentalApartment.furnished == True %}
+                                Ja
+                            {% else %}
+                                Nej
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>🐕</td>
+                        <td> Husdyr tilladt:</td>
+                        <td>{{ rentalApartment.animalsAllowed }}</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="col-md-4 detailsOfApartmentSecond">
+                <table>
+                    <tr>
+                    <td>
+                        <svg height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#C0FCFF;" d="M256,48.432c-68.784,0-124.541,55.76-124.541,124.541v166.054h249.081V172.973 C380.541,104.192,324.781,48.432,256,48.432z"></path> <path style="fill:#89D2E8;" d="M380.541,172.973c0-68.781-55.76-124.541-124.541-124.541v290.595h124.541V172.973z"></path> <path style="fill:#B66D38;" d="M491.243,318.27h-27.676h-62.27V172.973c0-80.117-65.179-145.297-145.297-145.297 s-145.297,65.18-145.297,145.297V318.27h-62.27H20.757C9.293,318.27,0,327.564,0,339.027s9.293,20.757,20.757,20.757h6.919v103.784 c0,11.463,9.293,20.757,20.757,20.757h415.135c11.463,0,20.757-9.293,20.757-20.757V359.784h6.919 c11.463,0,20.757-9.293,20.757-20.757S502.707,318.27,491.243,318.27z M110.703,442.811H69.189v-83.027h41.514V442.811z M359.784,172.973h-83.027V71.279C324.07,80.921,359.784,122.854,359.784,172.973z M235.243,71.279v101.694h-83.027 C152.216,122.854,187.93,80.921,235.243,71.279z M152.216,214.486h83.027V318.27h-83.027V214.486z M193.73,442.811h-41.514v-83.027 h41.514V442.811z M276.757,442.811h-41.514v-83.027h41.514V442.811z M359.784,442.811H318.27v-83.027h41.514V442.811z M276.757,318.27V214.486h83.027V318.27H276.757z M442.811,442.811h-41.514v-83.027h41.514V442.811z"></path> <path style="fill:#AA3827;" d="M491.243,318.27h-27.676h-62.27V172.973c0-80.117-65.179-145.297-145.297-145.297v332.108h20.757 v83.027H256v41.514h207.568c11.463,0,20.757-9.293,20.757-20.757V359.784h6.919c11.463,0,20.757-9.293,20.757-20.757 S502.707,318.27,491.243,318.27z M359.784,442.811H318.27v-83.027h41.514V442.811z M359.784,318.27h-83.027V214.486h83.027V318.27z M276.757,172.973V71.279c47.313,9.642,83.027,51.576,83.027,101.694H276.757z M442.811,442.811h-41.514v-83.027h41.514V442.811z"></path> </g></svg>
+                    </td>
+                        <td>
+                            Altan/terrasse:</td>
+                        <td>
+                            {% if rentalApartment.balcony %}
+                                Ja
+                            {% else %}
+                                Nej
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>💡</td>
+                        <td>Energimærke:</td>
+                        <td>B</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="none" stroke="#000000" stroke-linecap="round" stroke-width="2" d="M1,2.991155 C1,1.89147046 1.88967395,1 2.991155,1 L21.008845,1 C22.1085295,1 23,1.88967395 23,2.991155 L23,21.008845 C23,22.1085295 22.1103261,23 21.008845,23 L2.991155,23 C1.89147046,23 1,22.1103261 1,21.008845 L1,2.991155 Z M16.5,8 L18,10 L15,10 L16.5,8 Z M16.5,16 L18,14 L15,14 L16.5,16 Z M5,13 L6.55613518,9.88772964 C6.80127495,9.3974501 7.44386482,9 8,9 L8,9 C8.55228475,9 9.19907951,9.39815903 9.44386482,9.88772964 L11,13 M6.5,18 L7.75,10 L8,10 L8.25,10 L9.5,18 M8,7 C8.55228475,7 9,6.55228475 9,6 C9,5.44771525 8.55228475,5 8,5 C7.44771525,5 7,5.44771525 7,6 C7,6.55228475 7.44771525,7 8,7 Z"></path> </g></svg>
+                        </td>
+                        <td>Elevator:</td>
+                        <td>
+                            {% if rentalApartment.elevator %}
+                                Ja
+                            {% else %}
+                                Nej
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>🏡</td>
+                        <td>Etage:</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>🚗</td>
+                        <td>Parkering:</td>
+                        <td>
+                            {% if rentalApartment.parking %}
+                                Ja
+                            {% else %}
+                                Nej
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <br>
+        <h2>Detaljer om udlejningen</h2>
+        <div class="detailsOfLandlord">
+            <table>
+                <tr>
+                    <td>Lejeperiode:</td>
+                    <td>20/03/2023 - 20/03/2024</td>
+                </tr>
+                <tr>
+                    <td>Månedlig leje:</td>
+                    <td>{{ rentalApartment.monthlyRent }} kr.</td>
+                </tr>
+                <tr>
+                    <td>Indflytningspris:</td>
+                    <td>16000 kr.</td>
+                </tr>
+                <tr>
+                    <td>Ledig fra:</td>
+                    <td>{{ rentalApartment.availableFrom }}</td>
+                </tr>
+                <tr>
+                    <td>Forudbetalt husleje:</td>
+                    <td>{{ rentalApartment.prepaidRent }} kr.</td>
+                </tr>
+                <tr>
+                    <td>Oprettelsesdato:</td>
+                    <td>{{ rentalApartment.timestamp|date:"d/m/Y" }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% if isReported %}
+            <p class="report" style="color:#E1083E; font-style: italic;">Du har rapporteret denne annonce</p>
+        {% else %}
+            <div class="report">
+                <div data-bs-toggle="modal" data-bs-target="#reportModal" style="cursor: pointer;"
+                     id="openReportForm">
+                    <svg width="16px" height="16px" viewBox="0 -0.5 21 21" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier"><title>report_flag [#1420]</title>
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Dribbble-Light-Preview" transform="translate(-59.000000, -640.000000)"
+                                   fill="#000000">
+                                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                                        <path d="M7.2,492 L24,492 L24,480 L7.2,480 L7.2,492 Z M3,500 L5.1,500 L5.1,480 L3,480 L3,500 Z"
+                                              id="report_flag-[#1420]"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <p class="d-inline-block" style="vertical-align: middle; margin-bottom:4px;">Rapporter</p>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel"
+                     aria-hidden="true" data-bs-backdrop="static">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportModalLabel">Rapportér annonce</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h2 style="display: none; color:#28a745; text-align: center;" id="reportSentMessage">
+                                    ✅
+                                    <br>
+                                    <br>
+                                    <span>Anmeldelse indsendt</span>
+                                    </h2>
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="titleInput" class="form-label">Emne</label>
+                                        <input type="text" class="form-control" id="reportTitle" placeholder="Emne">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="reasonInput" class="form-label">Årsag</label>
+                                        <textarea class="form-control" id="reportReason" rows="4"
+                                                  placeholder="Skriv årsag"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="reportBtn"
+                                        onclick="reportRentalApartment()">Indsend
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div style="padding-bottom:100px; padding-top:100px;">
+        <hr>
+        <hr>
+    </div>
+
+        <!--
+            <p style="font-size:16px;">
+            <img src="https://www.trulia.com/images/icons/txl3/BedIcon.svg" alt="" style="width:24px;">
+            <span style="vertical-align: -1px;"></span>
+            <img src="https://www.trulia.com/images/icons/txl3/SquareFeetIcon.svg" alt="" style="margin-left:4px; width:24px;">
+            <span style="vertical-align: -1px;"> m²</span>
+        </p>
+    -->
+{% endblock %}
+
+
+

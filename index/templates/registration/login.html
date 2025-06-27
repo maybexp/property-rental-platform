@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block style %}
+<style>
+body {
+    background-color: #F8FAFB;
+}
+
+.navbar-light, .bg-light, .navbar{
+    background-color: transparent !important;
+    box-shadow: none;
+}
+
+.container{
+    display: flex;
+    gap: 20px;
+    margin-top:50px;
+}
+
+.navbarUserForm{
+    display:none !important;
+}
+
+.boligerneNavbar{
+
+}
+
+h1{
+    float:left;
+    font-weight: bold;
+    font-size: 30px;
+    color:#1C1C1C;
+}
+
+.loginForm{
+    width: 50%;
+}
+
+.loginForm p{
+    color:#1C1C1C;
+    text-decoration-line: underline;
+}
+
+.socialLogin:hover{
+    background-color:#212529;
+    color:white;
+}
+
+.createUserText{
+    float:right;
+    color:#FE2C55;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+.loginBtn{
+    background-color:#0D6EFD;
+    color:white;
+    width:400px;
+    display: block;
+    font-weight: bold;
+    width:100%;
+    height:45px;
+    border-radius: 15px;
+}
+
+.loginBtn:hover {
+    background-color: #0B63E0;
+    color:white;
+}
+
+label {
+  font-weight: bold;
+}
+
+#password {
+  margin-bottom:10px;
+}
+
+input[type=text], input[type=password]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    padding: 10px 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 15px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    outline: none;
+}
+
+.outerFooter{
+    display:none;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <!-- https://www.spotahome.com/s/london/for-rent:apartments -->
+    <div>
+        <img src="{% static 'login.svg' %}" alt="" class="img-fluid" style="max-width:400px;">
+    </div>
+    <div class="loginForm">
+        <h1>Log ind</h1>
+        <a href="{% url 'signup' %}" class="createUserText">Opret bruger</a>
+
+        <!--
+        <a href="#" class="" style="text-decoration-line: none">
+            <span style="vertical-align: middle; padding-bottom: 8px;">
+                <i class="bi bi-google"></i>
+            </span>
+            Google
+        </a>
+        -->
+        <br>
+        <br>
+        <form method="post" action="{% url 'login_view' %}" class="mx-auto">
+            {% csrf_token %}
+
+            <input type="text" placeholder="Email" autocomplete="off" autofocus name="email" id="email">
+            <br>
+            <input type="password" placeholder="Kodeord" name="password" id="password">
+            <p style="margin-bottom:10px; text-decoration-line: none;">
+                <a href="{% url 'password_reset' %}" style="color:#4F4F4F; text-decoration-line: none;">Glemt adgangskode?</a>
+            </p>
+            <input type="submit" value="Log ind" class="btn btn-default mx-auto loginBtn">
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+body{
+    background-color: #FBFAFA;
+}
+
+body{
+    /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.ctfassets.net/mivicpf5zews/5UVI6GzhTikSirjufwpNGS/855fb599b2330ee51cc470af91158a1c/Copenhagen2.jpg?q=75"); */
+   background-color: #FBFAFA;
+    background-size: 100% 430px;
+    background-repeat: no-repeat;
+    /*background-color: #FBFAFA;*/
+    }
+
+.apartmentCreated{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    /* padding:10px 200px 100px 200px;*/
+    margin-bottom:50px;
+    max-width:600px;
+    padding:20px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 30px;
+    padding-top:20px;
+    padding-bottom: 10px;
+}
+
+.apartmentCreated{
+    margin-bottom:20px;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="apartmentCreated mx-auto">
+        <h1 class="text-center">Din bolig er opsat!🎉🎉</h1>
+        <p>
+            Tillykke, din bolig er snart oprettet på vores platform!
+            <br>
+            <br>
+            Vi vil manuelt gennemgå din boligannonce. Når din annonce er godkendt, vil den blive tilgængelig på vores hjemmeside, og potentielle lejere vil kunne kontakte dig.
+            <br>
+            <br>
+            Du vil modtage en mail når boligen er godkendt - eller du kan følge med i annoncens status her:
+        </p>
+
+        <a href="{% url 'index' %}" class="btn btn-primary">Annoncens status</a>
+    </div>
+
+
+{% endblock %}

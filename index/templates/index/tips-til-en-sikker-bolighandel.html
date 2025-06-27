@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+body{
+    background-color: #FBFAFA;
+}
+
+.container{
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    padding:10px 50px 40px 50px;
+    margin-bottom:50px;
+    width:70%;
+}
+
+.container p{
+    margin-bottom:34px;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 30px;
+    padding-top:20px;
+    padding-bottom: 10px;
+}
+
+h2{
+    font-size:24px;
+}
+
+.table-of-contents {
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.table-of-contents .nav-link {
+    color: #333;
+    font-weight: 500;
+    font-size:15px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.table-of-contents .nav-link:hover {
+    background-color: #e1e1e1;
+    color: #333;
+}
+
+.table-of-contents .nav-link.active {
+    background-color: #333;
+    color: #fff;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <h1>Tips til en sikker bolighandel🔒</h1>
+    <nav class="table-of-contents">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#section1">Section 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section2">Section 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section3">Section 3</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section4">Section 4</a>
+            </li>
+        </ul>
+    </nav>
+    <h2><span style="font-weight: bold;">1. </span>Undersøg, hvem der ejer boligen, du vil leje</h2>
+    <p>Hvis du lejer en bolig fra en privat udlejer, så er det en god idé at bede om dokumentation for ejerskabet af boligen. Du kan nemt tjekke, hvem der ejer boligen, på
+        <a href="https://www.tinglysning.dk/" target="_blank">tinglysning.dk</a>.
+        <br>
+        <br>
+        Derudover bør du bede om at se udlejerens billedlegitimation i form af enten kørekort eller pas.
+
+        Det er også vigtigt at bemærke, om der er andre navne på døren, og om navnet på døren matcher navnet på postkassen.
+        <br>
+    </p>
+
+    <h2><span style="font-weight: bold;">2. </span>Se altid boligen, før du accepterer en lejekontrakt eller overfører penge</h2>
+    <p>
+Sørg altid for at få fremvist boligen, du skal leje, inden du overfører penge for depositum eller underskriver en lejekontrakt. Er det ikke muligt, bør du overveje en ekstra gang, om der er tale om et reelt lejemål og om der i øvrigt er forhold, du skal være betænkelig ved.
+    </p>
+
+    <h2><span style="font-weight: bold;">3. </span>Hvis udlejer beder dig om at overføre penge til en udenlandsk konto</h2>
+    <p></p>
+
+    <h2><span style="font-weight: bold;">4. </span>Hvis udlejer med det samme presser på for at få din underskrift</h2>
+    <h2><span style="font-weight: bold;">5. </span>Hvis udlejer kontakter dig på engelsk, men har skrevet boligannoncen på dansk</h2>
+    <p></p>
+{% endblock %}

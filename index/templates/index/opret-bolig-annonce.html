@@ -1,0 +1,474 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block style %}
+<style>
+
+body{
+    /*
+    background: url("https://images.bonnier.cloud/files/ill/production/2022/09/12110153/koebenhavn-er-danmarks-stoerste-by.jpg") no-repeat left top;
+    background-size: 100% auto;
+     */
+    background-color: #FBFAFA;
+}
+
+.container, .heading{
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    font-size:50px;
+    font-weight:bold;
+    color:black;
+    text-align: center;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3),
+    0px -4px 10px rgba(255,255,255,0.3);
+    padding-bottom: 20px;
+/*
+    text-decoration-line: underline;
+    text-decoration-color: #FE2C55
+
+*/
+}
+
+h2{
+    font-size:23px;
+    margin-top:30px;
+    margin-bottom:0px;
+    text-align: center
+}
+
+input, select{
+    -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+}
+
+.heading{
+    padding-top:10px;
+    /*
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("https://img.freepik.com/premium-photo/scenic-aerial-panoramic-view-old-town-skyline-lot-red-roofs-copenhagen-capital-denmark_218319-7922.jpg?w=2000");
+    background-size: cover;
+    background-repeat: no-repeat;
+    */
+    border-radius: 10px;
+    width:100%;
+}
+
+.required{
+    color:red;
+}
+
+#loginFirst{
+    display: none;
+}
+
+.form{
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    padding:50px 50px 200px 50px;
+    background-color: white;
+    max-width:800px;
+}
+
+.form-control:focus{
+    box-shadow: none;
+}
+
+label{
+    font-weight:bold;
+    margin-top:20px;
+}
+
+
+.squareMeterText{
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+.input-group-text-left-border{
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+
+.form-check-input {
+  border-width: 2px;
+}
+
+.form-check-label{
+    font-weight:normal;
+    margin:0px;
+}
+
+.submitBtn{
+    font-weight:bold;
+    padding:10px 16px;
+    font-size:20px;
+}
+
+/*  */
+
+.autocomplete-container {
+  /* relative position for at de absolut positionerede forslag får korrekt placering.*/
+  position: relative;
+  width: 100%;
+    /*   max-width: 30em; */
+}
+.autocomplete-container input {
+  /* Både input og forslag får samme bredde som omkringliggende DIV */
+  width: 100%;
+  box-sizing: border-box;
+}
+.dawa-autocomplete-suggestions {
+  margin: 0.3em 0 0 0;
+  padding: 0;
+  text-align: left;
+  border-radius: 0.3125em;
+  background: #fcfcfc;
+  box-shadow: 0 0.0625em 0.15625em rgba(0,0,0,.15);
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion {
+  margin: 0;
+  list-style: none;
+  cursor: pointer;
+  padding: 0.4em 0.6em;
+  color: #333;
+  border: 0.0625em solid #ddd;
+  border-bottom-width: 0;
+}
+.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:last-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  border-bottom-width: 0.0625em;
+}
+.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion.dawa-selected,
+.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:hover {
+  background: #f0f0f0;
+}
+
+</style>
+{% endblock %}
+
+{% block mobile %}
+
+    h1{
+    font-size:30px;
+    width:100%;
+    padding:0px;
+    margin:0px;
+    }
+
+    .submitBtn{
+        width:100%;
+    }
+
+    .form{
+    width:100%;
+    margin:0px;
+    padding:35px 15px;
+    }
+
+    .container{
+        padding:0px;
+    }
+
+    .heading{
+    padding-top:0px;
+    padding-bottom:30px;
+    }
+
+{% endblock %}
+
+{% block outsideContainerAboveBody %}
+
+{% endblock %}
+
+{% block body %}
+
+    <form action="{% url 'addApartment' %}" method="post" class="form mx-auto" enctype="multipart/form-data">
+        <div class="heading">
+            <h1>Udlej bolig gratis</h1>
+        </div>
+        <h2 id="loginFirst"><a href="{% url 'login' %}">Log ind først</a></h2>
+        {% csrf_token %}
+        <label for="address">📍Adresse <span class="required">*</span></label>
+        <div class='autocomplete-container'>
+            <input type="text" class="form-control" placeholder="Adresse" required id="adresse" name="address">
+        </div>
+        <label for="apartmentType">Boligtype <span class="required">*</span></label>
+        <select required class="form-control" id="apartmentType" name="apartmentType">
+            <option value="">Vælg</option>
+            <option value="Lejlighed">Lejlighed</option>
+            <option value="Værelse">Værelse</option>
+            <option value="Hus">Hus</option>
+            <option value="Rækkehus">Rækkehus</option>
+        </select>
+
+        <div style="display: inline-block">
+            <h2>Informationer om lejemålet</h2>
+            <div style="width:47%; display: inline-block; float:left;">
+                <label for="squareMeterInput" class="labelStyle">📏Areal <span class="required">*</span></label>
+                <div class="input-group" >
+                    <input type="tel" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" required class="form-control" id="squareMeterInput" placeholder="Størrelse"
+                           name="squareMeterInput">
+                    <div class="input-group-append">
+                        <span class="input-group-text squareMeterText">m2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: inline-block; width:47%; float:right;">
+                <label for="housingRooms">Antal værelser <span class="required">*</span></label>
+                <input type="tel" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" placeholder="Antal værelser" required class="form-control" id="housingRooms"
+                       name="housingRooms">
+            </div>
+        </div>
+        <br>
+
+        <label for="monthlyRent" class="labelStyle">💰 Månedlig husleje <span class="required">*</span></label>
+        <div class="input-group">
+            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" required class="form-control" id="monthlyRent" placeholder="Månedlig husleje" name="monthlyRent">
+            <div class="input-group-append">
+                <span class="input-group-text squareMeterText">kr/md</span>
+            </div>
+        </div>
+
+        <div>
+            <label for="deposit">Depositum <span class="required">*</span></label>
+            <div class="input-group">
+                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" placeholder="Depositum" required class="form-control" id="deposit" name="deposit">
+                <div class="input-group-append">
+                    <span class="input-group-text squareMeterText">kr</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <label for="prepaidRent">Forudbetalt leje</label>
+            <div class="input-group">
+                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" placeholder="Forudbetalt husleje" required class="form-control" id="prepaidRent" name="prepaidRent">
+                <div class="input-group-append">
+                    <span class="input-group-text squareMeterText">kr</span>
+                </div>
+            </div>
+        </div>
+
+
+        <label for="animalsAllowed">🐕 Husdyr <span class="required">*</span></label>
+        <select required class="form-control" id="animalsAllowed" name="animalsAllowed">
+            <option value="">Vælg</option>
+            <option value="notAllowed">Ikke tilladt</option>
+            <option value="allowed">Tilladt</option>
+            <option value="contactOwner">Kontakt udlejer</option>
+        </select>
+
+
+        <div class="form-group">
+            <label>Flere filtre:</label><br>
+            <div class="form-check">
+                <input type="checkbox" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" class="form-check-input" id="option1" name="balcony" value="Altan/terrasse">
+                <label class="form-check-label" for="option1">Altan/terrasse</label>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" class="form-check-input" id="option2" name="garden" value="Have">
+              <label class="form-check-label" for="option2">Have</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" class="form-check-input" id="option3" name="elevator" value="Elevator">
+              <label class="form-check-label" for="option3">Elevator</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="option4" name="furnished" value="Møbleret">
+              <label class="form-check-label" for="option4">Møbleret</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="option5" name="parking" value="Parkering">
+              <label class="form-check-label" for="option5">Parkering</label>
+          </div>
+        </div>
+
+        <h2 class="mb-2">Overtagelsesdato 📅</h2>
+
+        <div class="text-center mx-auto">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" autocomplete="off" autocorrect="off" autocapitalize="on"
+                       spellcheck="false" value="" id="availableFromCheckbox">
+                <label class="form-check-label" for="availableFromCheckbox">
+                    Straks
+                </label>
+            </div>
+            <input type="date" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false"
+                   style="display: inline-block;width:200px" class="form-control" id="moveInDate" name="availableFrom"
+                   lang="da" data-date-format="DD-MM-YYYY">
+        </div>
+
+        <h2 style="margin-top:34px;">Udlejningsperiode</h2>
+        <label for="rentalPeriod">Udlejningsperiode <span class="required">*</span></label>
+        <select required class="form-control" id="rentalPeriod" name="rentalPeriod">
+            <option value="">Vælg</option>
+            <option value="notAllowed">Ubegrænset</option>
+            <option value="allowed">Over 12 måneder</option>
+            <option value="contactOwner">Mindre end 12 måneder</option>
+        </select>
+
+
+        <h2 style="margin-top:34px;">Beskrivelse</h2>
+        <label for="heading">Overskrift <span class="required">*</span></label>
+        <input type="text" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" placeholder="Overskrift" required class="form-control" id="heading" name="heading">
+
+        <label for="description">Beskrivele <span class="required">*</span></label>
+        <textarea autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" placeholder="Beskrivelse" required class="form-control" id="description" name="description" cols="30" rows="5"></textarea>
+
+        <div style="display: inline-block">
+            <h2>Kontakt informationer</h2>
+            <div style="width:47%; display: inline-block; float:left;">
+                <label for="email" class="labelStyle">Email <span class="required">*</span></label>
+                <input type="email" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" required class="form-control" id="email" placeholder="Email" value="{{ user.email }}" name="email">
+            </div>
+
+            <div style="display: inline-block; width:47%; float:right;">
+                <label for="phoneNumber">Telefonnummer <span style="font-weight: normal;">(frivilligt)</span></label>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text input-group-text-left-border">+45</span>
+                    </div>
+                    <input type="tel" autocomplete="off" autocorrect="off" autocapitalize="on" spellcheck="false" placeholder="Telefonnummer" class="form-control" id="phoneNumber"
+                           name="phoneNumber">
+                </div>
+            </div>
+
+
+        </div>
+
+        <h2 style="margin-top: 40px;">Billeder</h2>
+        <label for="img">Vælg billeder:</label>
+        <input type="file" required id="img" name="img" accept="image/*" multiple class="form-control">
+
+        <br>
+        <input type="submit" class="btn btn-primary d-block mx-auto submitBtn" value="Opret annonce" id="submitBtn">
+    </form>
+
+
+
+    <script>
+        let moveInDateInput = document.getElementById('moveInDate');
+        let checkboxInput = document.getElementById('availableFromCheckbox');
+
+        checkboxInput.addEventListener('change', function () {
+            moveInDateInput.disabled = this.checked;
+        });
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+<script src="{% static 'javascript/dawa-autocomplete2.js' %}"></script>
+
+<script src="{% static 'script.js' %}"></script>
+
+    <script>
+    {% if user.is_authenticated %}
+        const allElements = ["adresse", "apartmentType", "squareMeterInput", "housingRooms", "monthlyRent", "deposit", "prepaidRent", "animalsAllowed", "option1", "option2", "option3", "option4", "option5", "availableFromCheckbox", "heading", "description", "email", "phoneNumber"];
+
+        for (let i = 0; i < allElements.length; i++) {
+            if (localStorage.getItem(allElements[i]) !== null) {
+                if (allElements[i] === "option1" || allElements[i] === "option2" || allElements[i] === "option3" || allElements[i] === "option4" || allElements[i] === "option5" || allElements[i] === "availableFromCheckbox") {
+                    document.getElementById(allElements[i]).checked = true
+                    if (allElements[i] === "availableFromCheckbox") {
+                        document.getElementById("moveInDate").disabled = true
+                    }
+                } else {
+                    document.getElementById(allElements[i]).value = localStorage.getItem(allElements[i])
+                }
+            } else {
+                document.getElementById(allElements[i]).checked = false;
+            }
+        }
+
+        let adresse = document.getElementById("adresse")
+        let apartmentType = document.getElementById("apartmentType")
+        let squareMeterInput = document.getElementById("squareMeterInput")
+        let housingRooms = document.getElementById("housingRooms")
+        let monthlyRent = document.getElementById("monthlyRent")
+        let deposit = document.getElementById("deposit")
+        let prepaidRent = document.getElementById("prepaidRent")
+        let animalsAllowed = document.getElementById("animalsAllowed")
+        let option1 = document.getElementById("option1")
+        let option2 = document.getElementById("option2")
+        let option3 = document.getElementById("option3")
+        let option4 = document.getElementById("option4")
+        let option5 = document.getElementById("option5")
+        let availableFromCheckbox = document.getElementById("availableFromCheckbox")
+        let heading = document.getElementById("heading")
+        let description = document.getElementById("description")
+        let email = document.getElementById("email")
+        let phoneNumber = document.getElementById("phoneNumber")
+
+
+        adresse.addEventListener('keyup', saveData);
+        apartmentType.addEventListener('keyup', saveData);
+        squareMeterInput.addEventListener('keyup', saveData);
+        housingRooms.addEventListener('keyup', saveData);
+        monthlyRent.addEventListener('keyup', saveData);
+        deposit.addEventListener('keyup', saveData);
+        prepaidRent.addEventListener('keyup', saveData);
+        animalsAllowed.addEventListener('keyup', saveData);
+        option1.addEventListener('change', saveDataCheckbox);
+        option2.addEventListener('change', saveDataCheckbox);
+        option3.addEventListener('change', saveDataCheckbox);
+        option4.addEventListener('change', saveDataCheckbox);
+        option5.addEventListener('change', saveDataCheckbox);
+        availableFromCheckbox.addEventListener('change', saveDataCheckbox);
+        heading.addEventListener('keyup', saveData);
+        description.addEventListener('keyup', saveData);
+        email.addEventListener('keyup', saveData);
+        phoneNumber.addEventListener('keyup', saveData);
+
+
+        function saveData() {
+            localStorage.setItem(this.id, this.value);
+        }
+
+        function saveDataCheckbox() {
+            if (this.checked) {
+                localStorage.setItem(this.id, this.value);
+            } else {
+                localStorage.removeItem(this.id);
+            }
+        }
+    {% elif not user.is_authenticated %}
+        const formControls = document.querySelectorAll('.form-control');
+        const formCheckControls = document.querySelectorAll('.form-check-input');
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('loginFirst').style.display = 'block';
+
+        formControls.forEach(control => {
+          control.disabled = true;
+        });
+
+        formCheckControls.forEach(control => {
+          control.disabled = true;
+        });
+
+
+    {% endif %}
+
+    </script>
+
+
+
+{% endblock %}
