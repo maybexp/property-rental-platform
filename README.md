@@ -8,7 +8,7 @@ Site for listing and searching rental properties. Includes most of the core rent
 
 
 - A nice design
-- Submit property listings with images, description, price, location, ect.
+- Submit property listings with images, description, price, location, etc.
 - Search and filter rental properties by various criteria
   - Report fraudulent properties
 - User authentication (sign up, login, logout)
