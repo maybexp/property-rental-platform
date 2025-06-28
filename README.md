@@ -34,7 +34,8 @@ Site for listing and searching rental properties. Includes most of the core rent
   - Type:
   - `pip install -r .\requirements.txt`
   - `python manage.py runserver`
-- **Admin credentials:**
+- **Admin panel:**
+  - localhost:8000/admin
   - Username: admin
   - Password: admin
 
